@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+      - run: dotnet restore topico-02-cliente-servidor/ClinicaVida.sln
+      - run: dotnet build topico-02-cliente-servidor/ClinicaVida.sln --no-restore -c Release
+      - run: dotnet test topico-02-cliente-servidor/ClinicaVida.sln --no-build -c Release
+
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - run: npm ci
+        working-directory: topico-02-cliente-servidor/web
+      - run: npm run build
+        working-directory: topico-02-cliente-servidor/web

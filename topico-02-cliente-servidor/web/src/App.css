@@ -1,0 +1,24 @@
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 16px;
+  text-align: left;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+}
+
+th,
+td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.erro {
+  color: #b00020;
+  font-weight: 600;
+}

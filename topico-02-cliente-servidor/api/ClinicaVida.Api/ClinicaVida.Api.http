@@ -1,0 +1,11 @@
+@ClinicaVida.Api_HostAddress = http://localhost:5084
+
+GET {{ClinicaVida.Api_HostAddress}}/api/consultas
+Accept: application/json
+
+###
+
+GET {{ClinicaVida.Api_HostAddress}}/api/consultas/1
+Accept: application/json
+
+###
