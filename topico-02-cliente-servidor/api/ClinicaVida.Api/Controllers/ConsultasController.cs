@@ -7,10 +7,10 @@ namespace ClinicaVida.Api.Controllers;
 [Route("api/[controller]")]
 public class ConsultasController : ControllerBase
 {
-    // Dados em memoria. A persistencia entra em um topico futuro.
+    // Dados em memória. A persistência entra em um tópico futuro.
     private static readonly List<Consulta> Agenda =
     [
-        new() { Id = 1, Paciente = "Ana Souza", Especialidade = "Clinica geral",
+        new() { Id = 1, Paciente = "Ana Souza", Especialidade = "Clínica geral",
                 DataHora = new DateTime(2026, 10, 5, 9, 0, 0) },
         new() { Id = 2, Paciente = "Bruno Lima", Especialidade = "Cardiologia",
                 DataHora = new DateTime(2026, 10, 5, 10, 30, 0) },
@@ -20,7 +20,7 @@ public class ConsultasController : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<Consulta>> Listar() => Ok(Agenda);
 
-    // GET /api/consultas/1 devolve uma consulta, ou 404 quando nao existe.
+    // GET /api/consultas/1 devolve uma consulta, ou 404 quando não existe.
     [HttpGet("{id:int}")]
     public ActionResult<Consulta> Buscar(int id)
     {

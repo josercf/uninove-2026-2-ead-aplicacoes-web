@@ -13,13 +13,18 @@ jobs:
       - uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '10.0.x'
+      # O portão real contra pacote vulnerável é o NuGet Audit, configurado em
+      # topico-02-cliente-servidor/api/Directory.Build.props (NuGetAudit,
+      # NuGetAuditMode=all e WarningsAsErrors para NU1901-NU1904). Com isso, o
+      # próprio restore falha de forma determinística quando existe pacote
+      # vulnerável, sem depender de nenhuma string de saída em inglês.
       - run: dotnet restore topico-02-cliente-servidor/ClinicaVida.sln
-      - name: Conferir pacotes vulneraveis
+      - name: Conferir pacotes vulneráveis (verificação adicional, informativa)
         run: |
           saida=$(dotnet list topico-02-cliente-servidor/ClinicaVida.sln package --vulnerable --include-transitive)
           echo "$saida"
           if echo "$saida" | grep -q "has the following vulnerable packages"; then
-            echo "Falha: existe pacote com vulnerabilidade conhecida."
+            echo "Aviso: existe pacote com vulnerabilidade conhecida. O restore acima já deveria ter falhado por causa do NuGet Audit."
             exit 1
           fi
       - run: dotnet build topico-02-cliente-servidor/ClinicaVida.sln --no-restore -c Release

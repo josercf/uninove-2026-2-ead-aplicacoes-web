@@ -1,127 +1,147 @@
-# ADR-001: Estrutura do repositorio de exemplos
+# ADR-001: Estrutura do repositório de exemplos
 
 **Data:** 2026-09-17
 
 **Status:** Aceita
 
-**Decisores:** Jose Romualdo (professor, disciplina Aplicacoes Web)
+**Decisores:** José Romualdo (professor, disciplina Aplicações Web)
 
 ## Contexto
 
-Este repositorio vai crescer ao longo do semestre ate reunir os topicos da
-disciplina Aplicacoes Web, comecando pelo Topico 02 (cliente-servidor). Tres
-escolhas precisam valer para todos os topicos seguintes, e nao fazia sentido
-decidir de novo a cada topico novo: o formato do arquivo de solucao do .NET,
+Este repositório vai crescer ao longo do semestre até reunir os tópicos da
+disciplina Aplicações Web, começando pelo Tópico 02 (cliente-servidor). Três
+escolhas precisam valer para todos os tópicos seguintes, e não fazia sentido
+decidir de novo a cada tópico novo: o formato do arquivo de solução do .NET,
 o que entra e o que fica de fora do scaffold gerado pelos templates, e como
-tratar pacote com vulnerabilidade de seguranca conhecida.
+tratar pacote com vulnerabilidade de segurança conhecida.
 
-O SDK 10 do .NET passou a gerar, por padrao, uma solucao no formato `.slnx`
+O SDK 10 do .NET passou a gerar, por padrão, uma solução no formato `.slnx`
 em vez do tradicional `.sln`. O template `dotnet new webapi` traz, por
-padrao, um controller e um modelo de exemplo (`WeatherForecastController`,
-`WeatherForecast`) sem relacao com o case da Clinica Vida+, e o `npm create
-vite` gera um `README.md` em ingles descrevendo o template, tambem sem
-relacao com o case. E o proprio `dotnet new webapi` trouxe, como dependencia
+padrão, um controller e um modelo de exemplo (`WeatherForecastController`,
+`WeatherForecast`) sem relação com o case da Clínica Vida+, e o `npm create
+vite` gera um `README.md` em inglês descrevendo o template, também sem
+relação com o case. E o próprio `dotnet new webapi` trouxe, como dependência
 transitiva de `Microsoft.AspNetCore.OpenApi 10.0.7`, o pacote
-`Microsoft.OpenApi` na versao `2.0.0`, que tem vulnerabilidade de severidade
+`Microsoft.OpenApi` na versão `2.0.0`, que tem vulnerabilidade de severidade
 alta registrada em GHSA-v5pm-xwqc-g5wc (CVE-2026-49451): um documento OpenAPI
-malicioso, com referencia circular de esquema, pode derrubar o processo que
-faz o parsing por estouro de pilha. O repositorio e publico e vai ser clonado
-e compilado por uma turma inteira de Analise e Desenvolvimento de Sistemas; a
-disciplina tem um topico proprio de seguranca na web (209588), e deixar um
+malicioso, com referência circular de esquema, pode derrubar o processo que
+faz o parsing por estouro de pilha. O repositório é público e vai ser clonado
+e compilado por uma turma inteira de Análise e Desenvolvimento de Sistemas; a
+disciplina tem um tópico próprio de segurança na web (209588), e deixar um
 aviso de vulnerabilidade alta aparecer sem tratamento a cada `dotnet
-restore`, `build` ou `test` ensinaria o habito contrario ao que esse topico
+restore`, `build` ou `test` ensinaria o hábito contrário ao que esse tópico
 pretende formar.
 
-## Decisao
+## Decisão
 
-Usamos o formato `.sln` (nao o `.slnx` padrao do SDK 10), removemos do
-commit o scaffold sem relacao com o case da Clinica Vida+, e fixamos
-`Microsoft.OpenApi` numa versao corrigida como `PackageReference` explicito
-nos dois projetos da API, em vez de remover o pacote.
+Usamos o formato `.sln` (não o `.slnx` padrão do SDK 10), removemos do
+commit o scaffold sem relação com o case da Clínica Vida+, e fixamos
+`Microsoft.OpenApi` numa versão corrigida como `PackageReference` explícito
+nos dois projetos da API, com o NuGet Audit configurado para transformar
+qualquer aviso de vulnerabilidade futuro em erro de build.
 
-## Motivacoes
+## Motivações
 
-- **`.sln` em vez de `.slnx`:** o `.sln` ainda e o formato mais reconhecido
-  por versoes mais antigas do Visual Studio, do VS Code e de extensoes de
-  terceiros que alunos podem ter instaladas nas suas maquinas. O `.slnx` e
-  um formato novo (XML), e alunos de ADS em ambiente EAD, que ja relatam
-  dificuldade com a ferramenta, nao deveriam precisar descobrir por que a
-  IDE deles nao abre o arquivo de solucao esperado. Essa e a mesma decisao
-  registrada no ADR-001 do repositorio irmao,
-  `uninove-2026-2-ead-modelagem-oo`, para manter os dois repositorios com a
+- **`.sln` em vez de `.slnx`:** o `.sln` ainda é o formato mais reconhecido
+  por versões mais antigas do Visual Studio, do VS Code e de extensões de
+  terceiros que alunos podem ter instaladas nas suas máquinas. O `.slnx` é
+  um formato novo (XML), e alunos de ADS em ambiente EAD, que já relatam
+  dificuldade com a ferramenta, não deveriam precisar descobrir por que a
+  IDE deles não abre o arquivo de solução esperado. Essa é a mesma decisão
+  registrada no ADR-001 do repositório irmão,
+  `uninove-2026-2-ead-modelagem-oo`, para manter os dois repositórios com a
   mesma cara.
-- **Remocao do scaffold do template:** `WeatherForecastController.cs` e
-  `WeatherForecast.cs` sao o exemplo generico que o `dotnet new webapi`
-  cria para toda API nova, sem nenhuma relacao com consultas, pacientes ou
-  especialidades da Clinica Vida+. Deixa-los no repositorio confundiria o
-  aluno sobre qual codigo e o exemplo da aula e qual e sobra do gerador. O
-  mesmo vale para o `README.md` em ingles que o `npm create vite` gera
-  dentro de `web/`: o repositorio inteiro e em portugues, e um segundo
-  README com instrucoes genericas do template, em outro idioma, colide com
-  o README do topico que ja explica como rodar o front.
+- **Remoção do scaffold do template:** `WeatherForecastController.cs` e
+  `WeatherForecast.cs` são o exemplo genérico que o `dotnet new webapi`
+  cria para toda API nova, sem nenhuma relação com consultas, pacientes ou
+  especialidades da Clínica Vida+. Deixá-los no repositório confundiria o
+  aluno sobre qual código é o exemplo da aula e qual é sobra do gerador. O
+  mesmo vale para o `README.md` em inglês que o `npm create vite` gera
+  dentro de `web/`: o repositório inteiro é em português, e um segundo
+  README com instruções genéricas do template, em outro idioma, colide com
+  o README do tópico que já explica como rodar o front.
 - **Pacote fixado, em vez de removido:** o advisory GHSA-v5pm-xwqc-g5wc lista
-  `2.7.5` como a primeira versao corrigida da linha 2.x, e a linha 3.x tem
-  `3.5.4` como primeira versao corrigida; a mais recente disponivel na
-  linha 2.x no momento desta decisao e `2.12.2`. Como
+  `2.7.5` como a primeira versão corrigida da linha 2.x, e a linha 3.x tem
+  `3.5.4` como primeira versão corrigida; a mais recente disponível na
+  linha 2.x no momento desta decisão é `2.12.2`. Como
   `Microsoft.AspNetCore.OpenApi 10.0.7` (o pacote que o template do SDK 10
-  referencia diretamente) foi construido contra a API da linha 2.x do
-  `Microsoft.OpenApi`, promover o pacote a `PackageReference` explicito na
-  versao `2.12.2`, sem trocar de major version, resolve o aviso sem risco de
-  quebrar a integracao entre os dois pacotes. Remover o `Microsoft.OpenApi`
-  por completo exigiria tambem remover `AddOpenApi()`/`MapOpenApi()` de
+  referencia diretamente) foi construído contra a API da linha 2.x do
+  `Microsoft.OpenApi`, promover o pacote a `PackageReference` explícito na
+  versão `2.12.2`, sem trocar de major version, resolve o aviso sem risco de
+  quebrar a integração entre os dois pacotes. Remover o `Microsoft.OpenApi`
+  por completo exigiria também remover `AddOpenApi()`/`MapOpenApi()` de
   `Program.cs` e a `PackageReference` de `Microsoft.AspNetCore.OpenApi`, o
-  que adiantaria, sem necessidade, uma decisao de escopo (onde entra o
-  Swagger/OpenAPI) que pertence ao topico de APIs (209585), nao ao topico de
-  cliente-servidor.
+  que adiantaria, sem necessidade, uma decisão de escopo (onde entra o
+  Swagger/OpenAPI) que pertence exclusivamente ao tópico de APIs (209585).
+- **NuGet Audit como portão real, em vez de depender só de um `grep` na CI:**
+  a primeira versão deste repositório barrava pacote vulnerável na CI com um
+  passo que rodava `dotnet list package --vulnerable` e procurava a string
+  literal em inglês `"has the following vulnerable packages"` na saída. Esse
+  mecanismo tem uma falha: se o texto de saída do `dotnet` mudar numa versão
+  futura do SDK, ou se a run rodar sob um locale que não seja inglês, o
+  `grep` deixa de casar e o passo passa em silêncio, exatamente o cenário que
+  deveria impedir. O NuGet Audit (`NuGetAudit`, `NuGetAuditMode` e
+  `NuGetAuditLevel`, configurados em
+  `topico-02-cliente-servidor/api/Directory.Build.props`) é o mecanismo
+  nativo do próprio SDK: ele gera os avisos `NU1901` a `NU1904` durante o
+  `restore`, e `WarningsAsErrors` transforma esses avisos em erro de build,
+  o que interrompe o `restore` de forma determinística, sem depender de
+  nenhuma string de saída. O passo de `grep` na CI foi mantido como
+  verificação adicional, mas deixou de ser o portão real.
 
-## Riscos conhecidos e mitigacoes
+## Riscos conhecidos e mitigações
 
 - **Risco:** o `.sln` manual pode ficar desatualizado se um novo projeto for
   criado sem passar por `dotnet sln add`.
-  **Mitigacao:** o `README.md` de cada novo topico deve documentar o comando
-  `dotnet sln add`, e a CI (`dotnet build` na solucao) falha se algum
-  projeto nao estiver referenciado corretamente.
-- **Risco:** um pacote transitivo novo, de qualquer dependencia futura, pode
-  trazer de volta uma vulnerabilidade conhecida sem que ninguem perceba, em
-  algum dos proximos topicos.
-  **Mitigacao:** a CI ganhou um passo dedicado, "Conferir pacotes
-  vulneraveis", que roda `dotnet list package --vulnerable
-  --include-transitive` logo apos o restore e falha o job `api` se a saida
-  contiver "has the following vulnerable packages". Esse passo foi testado
-  localmente antes da correcao, forcando `Microsoft.OpenApi` de volta para
-  `2.0.0`, e confirmado que ele reconhece o pacote vulneravel e retorna
-  codigo de saida 1.
-- **Risco:** fixar `Microsoft.OpenApi` numa versao explicita separa esse
-  pacote da versao que `Microsoft.AspNetCore.OpenApi` passar a exigir em
-  atualizacoes futuras do SDK, podendo gerar um conflito de versao mais
+  **Mitigação:** o `README.md` de cada novo tópico deve documentar o comando
+  `dotnet sln add`, e a CI (`dotnet build` na solução) falha se algum
+  projeto não estiver referenciado corretamente.
+- **Risco:** um pacote transitivo novo, de qualquer dependência futura, pode
+  trazer de volta uma vulnerabilidade conhecida sem que ninguém perceba, em
+  algum dos próximos tópicos.
+  **Mitigação:** o NuGet Audit, configurado em
+  `topico-02-cliente-servidor/api/Directory.Build.props`, roda a cada
+  `dotnet restore` (local ou na CI) e falha o build com erro `NU1901`-`NU1904`
+  assim que um pacote (direto ou transitivo) tiver vulnerabilidade conhecida
+  de severidade `low` ou maior. Esse comportamento foi testado de propósito:
+  forçamos `Microsoft.OpenApi` de volta para `2.0.0` e confirmamos que o
+  `dotnet restore` falha com `error NU1903: Warning As Error`, sem chegar a
+  compilar nada; depois restauramos `2.12.2` e confirmamos o build limpo de
+  novo. O passo de CI que roda `dotnet list package --vulnerable` continua
+  presente como verificação adicional e informativa, mas o portão real
+  agora é o próprio restore.
+- **Risco:** fixar `Microsoft.OpenApi` numa versão explícita separa esse
+  pacote da versão que `Microsoft.AspNetCore.OpenApi` passar a exigir em
+  atualizações futuras do SDK, podendo gerar um conflito de versão mais
   adiante.
-  **Mitigacao:** o novo passo de CI descrito acima roda a cada `push` e
-  `pull_request`, entao qualquer conflito ou vulnerabilidade reintroduzida
-  por uma atualizacao de dependencia aparece no proximo envio de codigo, nao
-  silenciosamente.
+  **Mitigação:** o NuGet Audit descrito acima roda a cada `dotnet restore`,
+  local ou na CI, então qualquer conflito ou vulnerabilidade reintroduzida
+  por uma atualização de dependência fica visível já no próximo envio de
+  código.
 
-## Consequencias
+## Consequências
 
-Positivas: a solucao abre sem aviso em qualquer versao recente de IDE que os
-alunos ja tenham instalada; o codigo do topico so contem o que pertence ao
-exemplo da Clinica Vida+, sem ruido de gerador de template; `dotnet restore`,
+Positivas: a solução abre sem aviso em qualquer versão recente de IDE que os
+alunos já tenham instalada; o código do tópico só contém o que pertence ao
+exemplo da Clínica Vida+, sem ruído de gerador de template; `dotnet restore`,
 `build` e `test` rodam sem nenhum aviso de vulnerabilidade conhecida; e a CI
-passa a barrar, de forma automatica, qualquer pacote vulneravel que entrar
-num topico futuro, sem depender de alguem lembrar de checar manualmente.
+passa a barrar, pelo mecanismo nativo do NuGet Audit, qualquer pacote
+vulnerável que entrar num tópico futuro, sem depender de alguém lembrar de
+checar manualmente.
 
 Negativas: o `.sln` precisa ser atualizado manualmente (via `dotnet sln
 add`) toda vez que um projeto novo for criado; `Microsoft.OpenApi` passou a
-ser uma dependencia fixada a mao, que alguem precisa lembrar de revisar
-quando o SDK do .NET for atualizado; e o job `web` da CI, por enquanto, so
+ser uma dependência fixada à mão, que alguém precisa lembrar de revisar
+quando o SDK do .NET for atualizado; e o job `web` da CI, por enquanto, só
 compila o front (`npm run build`), sem nenhum teste automatizado de
-interface. Essa ultima lacuna e uma consequencia aceita para o Topico 02: o
-exemplo e deliberadamente simples (uma tabela que busca uma lista), e o
-esforco de montar testes de UI (por exemplo, com Testing Library) fica para
-quando um topico futuro justificar esse investimento por ter logica de
-interface mais rica que so a exibicao de uma lista.
+interface. Essa última lacuna é uma consequência aceita para o Tópico 02: o
+exemplo é deliberadamente simples (uma tabela que busca uma lista), e o
+esforço de montar testes de UI (por exemplo, com Testing Library) fica para
+quando um tópico futuro justificar esse investimento por ter lógica de
+interface mais rica que só a exibição de uma lista.
 
 ## ADRs relacionadas
 
-Nenhuma ate o momento. Este e o primeiro ADR deste repositorio. Ele espelha,
-para a disciplina Aplicacoes Web, a decisao de `.sln` registrada no
-ADR-001 do repositorio irmao `uninove-2026-2-ead-modelagem-oo`.
+Nenhuma até o momento. Este é o primeiro ADR deste repositório. Ele espelha,
+para a disciplina Aplicações Web, a decisão de `.sln` registrada no
+ADR-001 do repositório irmão `uninove-2026-2-ead-modelagem-oo`.

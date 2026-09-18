@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 
-// Formata a data e hora da consulta no padrao brasileiro.
+// Formata a data e hora da consulta no padrão brasileiro.
 function formatarDataHora(dataHoraIso) {
   const data = new Date(dataHoraIso)
   return data.toLocaleString('pt-BR', {
@@ -11,16 +11,16 @@ function formatarDataHora(dataHoraIso) {
 }
 
 function App() {
-  // "carregando": a requisicao ainda esta em andamento.
-  // "consultas": a lista devolvida pela API, depois que a requisicao termina.
-  // "erro": mensagem para exibir quando a requisicao falha.
+  // "carregando": a requisição ainda está em andamento.
+  // "consultas": a lista devolvida pela API, depois que a requisição termina.
+  // "erro": mensagem para exibir quando a requisição falha.
   const [consultas, setConsultas] = useState([])
   const [carregando, setCarregando] = useState(true)
   const [erro, setErro] = useState(null)
 
   useEffect(() => {
     // Busca a agenda de consultas na API. Abra a aba Network do DevTools
-    // antes de recarregar a pagina para ver esta requisicao acontecer.
+    // antes de recarregar a página para ver esta requisição acontecer.
     fetch('/api/consultas')
       .then((resposta) => {
         if (!resposta.ok) {
@@ -40,17 +40,17 @@ function App() {
 
   return (
     <main>
-      <h1>Agenda da Clinica Vida+</h1>
+      <h1>Agenda da Clínica Vida+</h1>
       <p>
-        Esta pagina busca a lista de consultas na API ASP.NET Core, pelo
-        endereco <code>/api/consultas</code>.
+        Esta página busca a lista de consultas na API ASP.NET Core, pelo
+        endereço <code>/api/consultas</code>.
       </p>
 
       {carregando && <p role="status">Carregando a agenda...</p>}
 
       {erro && (
         <p role="alert" className="erro">
-          Nao foi possivel carregar a agenda: {erro}
+          Não foi possível carregar a agenda: {erro}
         </p>
       )}
 

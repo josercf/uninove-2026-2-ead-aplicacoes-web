@@ -1,24 +1,44 @@
-# Aplicacoes Web, EAD Uninove
+# Aplicações Web, EAD Uninove
 
-Este repositorio reune os exemplos executaveis da disciplina Aplicacoes Web, do curso de Analise e Desenvolvimento de Sistemas da Uninove, oferta EAD de 2026.2.
+Este repositório reúne os exemplos executáveis da disciplina Aplicações Web, do curso de Análise e Desenvolvimento de Sistemas da Uninove, oferta EAD de 2026.2.
 
-Todo o codigo aqui usa um unico case ao longo do semestre: a Clinica Vida+, um sistema de agendamento de consultas medicas. Cada topico da disciplina adiciona uma peca nova a esse sistema, comecando pela comunicacao entre uma API ASP.NET Core e um front React.
+Todo o código aqui usa um único case ao longo do semestre: a Clínica Vida+, um sistema de agendamento de consultas médicas. Cada tópico da disciplina adiciona uma peça nova a esse sistema, começando pela comunicação entre uma API ASP.NET Core e um front React.
 
-Os trechos de codigo citados nas aulas apontam para os arquivos deste repositorio. Se algum trecho da aula estiver diferente do codigo aqui, isso e um erro do material e deve ser reportado ao professor.
+Os trechos de código citados nas aulas apontam para os arquivos deste repositório. Se algum trecho da aula estiver diferente do código aqui, isso é um erro do material e deve ser reportado ao professor.
 
-## Topicos
+## Como começar
 
-| Topico | Assunto | Pasta |
+1. Clonar o repositório:
+
+   ```bash
+   git clone https://github.com/josercf/uninove-2026-2-ead-aplicacoes-web.git
+   ```
+
+   Resultado esperado: uma pasta nova chamada `uninove-2026-2-ead-aplicacoes-web` aparece no diretório onde você rodou o comando.
+
+2. Entrar na pasta do repositório:
+
+   ```bash
+   cd uninove-2026-2-ead-aplicacoes-web
+   ```
+
+   Resultado esperado: o comando `ls` (ou `dir` no Windows) mostra o arquivo `README.md` e a pasta `topico-02-cliente-servidor`.
+
+Depois disso, siga a seção "Como rodar tudo de uma vez" logo abaixo, ou entre direto na pasta do tópico que você quer estudar.
+
+## Tópicos
+
+| Tópico | Assunto | Pasta |
 |---|---|---|
 | 02 | Cliente-servidor | [`topico-02-cliente-servidor`](./topico-02-cliente-servidor) |
 
-Os demais topicos da disciplina serao adicionados a esta tabela conforme as proximas aulas forem publicadas.
+Os demais tópicos da disciplina serão adicionados a esta tabela conforme as próximas aulas forem publicadas.
 
 ## Como rodar tudo de uma vez
 
-Estes comandos rodam a partir da pasta raiz do repositorio (a pasta onde esta este `README.md`).
+Estes comandos rodam a partir da pasta raiz do repositório (a pasta onde está este `README.md`).
 
-1. Restaurar e testar a parte de API de todos os topicos:
+1. Restaurar e testar a parte de API de todos os tópicos:
 
    ```bash
    dotnet restore topico-02-cliente-servidor/ClinicaVida.sln
@@ -28,27 +48,28 @@ Estes comandos rodam a partir da pasta raiz do repositorio (a pasta onde esta es
 
    Resultado esperado: o build termina com `Build succeeded` e os testes aparecem como `Passed`.
 
-2. Instalar e compilar a parte de front de todos os topicos:
+2. Instalar e compilar a parte de front de todos os tópicos:
 
    ```bash
    cd topico-02-cliente-servidor/web && npm install && npm run build && cd ../..
    ```
 
-   Resultado esperado: a ultima linha mostra `built in` seguido de um tempo, sem nenhuma linha de erro.
+   Resultado esperado: a última linha mostra `built in` seguido de um tempo, sem nenhuma linha de erro.
 
-Para rodar um exemplo especifico com o passo a passo completo, entre na pasta do topico indicada na tabela acima e siga o `README.md` de dentro dela. Cada topico tem seu proprio passo a passo, com a saida esperada e uma secao de ajuda caso algo de errado.
+Para rodar um exemplo específico com o passo a passo completo, entre na pasta do tópico indicada na tabela acima e siga o `README.md` de dentro dela. Cada tópico tem seu próprio passo a passo, com a saída esperada e uma seção de ajuda caso algo dê errado.
 
-## Pre-requisitos gerais
+## Pré-requisitos gerais
 
 - .NET SDK 10.0 ou superior instalado. Confirme com `dotnet --version`.
 - Node.js 18 ou superior e npm instalados. Confirme com `node --version` e `npm --version`.
-- Git instalado, para clonar o repositorio.
+- Git instalado, para clonar o repositório.
 
-## Estrutura do repositorio
+## Estrutura do repositório
 
-- `topico-NN-nome-do-assunto/`: um exemplo executavel por topico da disciplina, com API, front (quando o topico tiver um) e README proprio.
-- `.github/workflows/ci.yml`: a integracao continua, que compila e testa a API e compila o front a cada envio de codigo.
+- `topico-NN-nome-do-assunto/`: um exemplo executável por tópico da disciplina, com API, front (quando o tópico tiver um) e README próprio.
+- `docs/adrs/`: as decisões arquiteturais registradas ao longo do semestre, uma por arquivo, numeradas em ordem.
+- `.github/workflows/ci.yml`: a integração contínua, que compila e testa a API e compila o front a cada envio de código.
 
-## Licenca e uso didatico
+## Licença e uso didático
 
-Este repositorio esta sob a licenca MIT (veja o arquivo [`LICENSE`](./LICENSE)). O codigo foi escrito para fins didaticos, como material de apoio da disciplina, e nao passou por revisao de seguranca nem foi pensado para uso em producao.
+Este repositório está sob a licença MIT (veja o arquivo [`LICENSE`](./LICENSE)). O código foi escrito para fins didáticos, como material de apoio da disciplina, e não passou por revisão de segurança nem foi pensado para uso em produção.

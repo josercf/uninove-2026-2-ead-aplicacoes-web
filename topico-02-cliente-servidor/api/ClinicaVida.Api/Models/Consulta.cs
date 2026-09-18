@@ -1,6 +1,6 @@
 namespace ClinicaVida.Api.Models;
 
-/// <summary>Uma consulta agendada na Clinica Vida+.</summary>
+/// <summary>Uma consulta agendada na Clínica Vida+.</summary>
 public class Consulta
 {
     public int Id { get; set; }
