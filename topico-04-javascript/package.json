@@ -1,0 +1,12 @@
+{
+  "name": "topico-04-javascript",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "vite": "^8.3.0"
+  }
+}

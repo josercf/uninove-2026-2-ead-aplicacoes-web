@@ -1,0 +1,39 @@
+/* Estilo base: pensado primeiro para a tela do celular. */
+/* Seletor *: vale para todo elemento; border-box conta borda e padding dentro da largura. */
+* { box-sizing: border-box; }
+/* Seletor de tag: margin 0 tira a margem que o navegador põe em volta do body. */
+body { margin: 0; font-family: system-ui, sans-serif; color: #1b1b1b; background: #fafafa; }
+/* Seletor de classe .topo: grade de duas colunas, a do logotipo e a do título. */
+/* auto mede pelo conteúdo; 1fr fica com todo o espaço que sobra na linha. */
+.topo { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 0.5rem 1rem; padding: 1rem; background: #2e7d32; color: #fff; }
+/* Seletor descendente: só o h1 que está dentro de .topo. */
+.topo h1 { margin: 0; font-size: 1.5rem; }
+/* 1 / -1: o menu vai da primeira à última coluna, numa linha só para ele. */
+.topo nav { grid-column: 1 / -1; }
+/* flex põe os links lado a lado; flex-wrap quebra a linha quando falta espaço. */
+.topo nav ul { display: flex; flex-wrap: wrap; gap: 1rem; margin: 0; padding: 0; list-style: none; }
+/* Esta regra do autor vence o azul que o navegador dá aos links. */
+.topo a { color: #fff; }
+main { padding: 1rem; }
+/* No celular, os cartões ficam numa coluna só, um embaixo do outro. */
+.cartoes { display: grid; grid-template-columns: 1fr; gap: 1rem; padding: 0; list-style: none; }
+/* Caixa: padding é o espaço interno, border é a borda, border-radius arredonda os cantos. */
+.cartoes li { padding: 1rem; background: #fff; border: 1px solid #d0d0d0; border-radius: 8px; }
+/* collapse junta as bordas de células vizinhas numa linha só. */
+table { width: 100%; border-collapse: collapse; }
+/* Lista de seletores: a mesma regra vale para th e para td. */
+th, td { padding: 0.5rem; border-bottom: 1px solid #d0d0d0; text-align: left; }
+footer { padding: 1rem; background: #eeeeee; }
+
+/* A partir de 768px de largura, o layout aproveita o espaço da tela. */
+/* min-width: as regras abaixo só valem com a janela de 768px ou mais. */
+@media (min-width: 768px) {
+  /* Três colunas: logotipo, título e menu na mesma linha. */
+  .topo { grid-template-columns: auto auto 1fr; }
+  /* O menu volta a ocupar uma coluna só e encosta na direita. */
+  .topo nav { grid-column: auto; justify-self: end; }
+  /* repeat(3, 1fr): três colunas de larguras iguais para os cartões. */
+  .cartoes { grid-template-columns: repeat(3, 1fr); }
+  /* max-width e margin auto: o conteúdo para em 960px e fica centralizado. */
+  main { max-width: 960px; margin: 0 auto; }
+}

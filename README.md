@@ -32,6 +32,7 @@ Depois disso, siga a seção "Como rodar tudo de uma vez" logo abaixo, ou entre 
 |---|---|---|
 | 01 | Cliente-servidor | [`topico-01-cliente-servidor`](./topico-01-cliente-servidor) |
 | 03 | HTML semântico e CSS responsivo | [`topico-03-html-css`](./topico-03-html-css) |
+| 04 | Introdução ao JavaScript | [`topico-04-javascript`](./topico-04-javascript) |
 
 A aula 02 usa a mesma pasta do tópico 01 e por isso não tem pasta própria. Os demais tópicos da disciplina serão adicionados a esta tabela conforme as próximas aulas forem publicadas.
 
@@ -65,6 +66,14 @@ Estes comandos rodam a partir da pasta raiz do repositório (a pasta onde está 
 
    Resultado esperado: `ℹ pass 7` e `ℹ fail 0` no fim da saída.
 
+4. Instalar e testar o filtro em JavaScript do tópico 04:
+
+   ```bash
+   cd topico-04-javascript && npm install && npm test && cd ..
+   ```
+
+   Resultado esperado: `ℹ pass 6` e `ℹ fail 0` no fim da saída.
+
 Para rodar um exemplo específico com o passo a passo completo, entre na pasta do tópico indicada na tabela acima e siga o `README.md` de dentro dela. Cada tópico tem seu próprio passo a passo, com a saída esperada e uma seção de ajuda caso algo dê errado.
 
 ## Pré-requisitos gerais
@@ -77,7 +86,7 @@ Para rodar um exemplo específico com o passo a passo completo, entre na pasta d
 
 - `topico-NN-nome-do-assunto/`: um exemplo executável por tópico da disciplina, com API, front (quando o tópico tiver um) e README próprio.
 - `docs/adrs/`: as decisões arquiteturais registradas ao longo do semestre, uma por arquivo, numeradas em ordem.
-- `.github/workflows/ci.yml`: a integração contínua, que compila e testa a API, compila o front e roda os testes da página do tópico 03 a cada envio de código.
+- `.github/workflows/ci.yml`: a integração contínua, que compila e testa a API, compila o front, roda os testes da página do tópico 03 e os das funções JavaScript do tópico 04 a cada envio de código.
 
 ## Licença e uso didático
 
