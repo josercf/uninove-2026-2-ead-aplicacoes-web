@@ -1,4 +1,4 @@
-# Tópico 02: Cliente-servidor
+# Tópico 01: Cliente-servidor
 
 Este exemplo mostra a arquitetura cliente-servidor na prática. Uma API ASP.NET Core guarda a agenda da Clínica Vida+ em memória, e um front React busca essa agenda pela rede e mostra o resultado em uma tabela.
 
@@ -35,7 +35,7 @@ Antes de começar, confira se você tem o que precisa.
    ls
    ```
 
-   Resultado esperado: a lista de arquivos mostra a pasta `topico-02-cliente-servidor`.
+   Resultado esperado: a lista de arquivos mostra a pasta `topico-01-cliente-servidor`.
 
 ## Como executar
 
@@ -44,7 +44,7 @@ Siga os passos na ordem. Rode cada comando a partir da pasta raiz do repositóri
 ### Passo 1: Restaurar as dependências da API
 
 ```bash
-dotnet restore topico-02-cliente-servidor/ClinicaVida.sln
+dotnet restore topico-01-cliente-servidor/ClinicaVida.sln
 ```
 
 Resultado esperado: o terminal mostra mensagens de "Restaurado" (ou "Restored") e não mostra nenhuma linha de erro.
@@ -52,7 +52,7 @@ Resultado esperado: o terminal mostra mensagens de "Restaurado" (ou "Restored") 
 ### Passo 2: Rodar os testes automatizados da API
 
 ```bash
-dotnet test topico-02-cliente-servidor/ClinicaVida.sln
+dotnet test topico-01-cliente-servidor/ClinicaVida.sln
 ```
 
 Resultado esperado: a última linha mostra `Passed! - Failed: 0, Passed: 5, Skipped: 0, Total: 5`.
@@ -60,7 +60,7 @@ Resultado esperado: a última linha mostra `Passed! - Failed: 0, Passed: 5, Skip
 ### Passo 3: Subir a API
 
 ```bash
-dotnet run --project topico-02-cliente-servidor/api/ClinicaVida.Api
+dotnet run --project topico-01-cliente-servidor/api/ClinicaVida.Api
 ```
 
 Resultado esperado: o terminal mostra a linha `Now listening on: http://localhost:5084`. Deixe este terminal aberto e rodando; a API precisa continuar de pé para o front conseguir conversar com ela. Se a sua máquina imprimir uma porta diferente de `5084`, anote o número real e use-o no lugar de `5084` em todos os passos seguintes.
@@ -80,7 +80,7 @@ Resultado esperado: uma linha de JSON com duas consultas, cada uma com `id`, `pa
 Em um novo terminal (deixe os dois anteriores abertos):
 
 ```bash
-cd topico-02-cliente-servidor/web
+cd topico-01-cliente-servidor/web
 npm install
 ```
 
@@ -88,7 +88,7 @@ Resultado esperado: o terminal termina com uma linha do tipo `added N packages` 
 
 ### Passo 6: Subir o front
 
-Ainda dentro da pasta `topico-02-cliente-servidor/web`:
+Ainda dentro da pasta `topico-01-cliente-servidor/web`:
 
 ```bash
 npm run dev
@@ -142,7 +142,7 @@ Depois de instalar, feche o terminal, abra um novo e rode `dotnet --version` de 
 
 Isso significa que o front não conseguiu conversar com a API. A causa mais comum é a API do Passo 3 não estar rodando, ou estar rodando em uma porta diferente da que o `vite.config.js` espera.
 
-Correção: confira se o terminal do Passo 3 ainda mostra a API rodando. Se a porta impressa for diferente de `5084`, abra `topico-02-cliente-servidor/web/vite.config.js` e troque `5084` pela porta real, depois pare o front com `Ctrl+C` e rode `npm run dev` de novo.
+Correção: confira se o terminal do Passo 3 ainda mostra a API rodando. Se a porta impressa for diferente de `5084`, abra `topico-01-cliente-servidor/web/vite.config.js` e troque `5084` pela porta real, depois pare o front com `Ctrl+C` e rode `npm run dev` de novo.
 
 ### Erro 3: "Could not find project or directory" ou caminho não encontrado
 
@@ -152,7 +152,7 @@ Correção: volte para a pasta raiz do repositório antes de rodar o comando.
 
 ```bash
 cd caminho/para/uninove-2026-2-ead-aplicacoes-web
-dotnet run --project topico-02-cliente-servidor/api/ClinicaVida.Api
+dotnet run --project topico-01-cliente-servidor/api/ClinicaVida.Api
 ```
 
 Troque `caminho/para/` pelo caminho real onde você clonou o repositório na sua máquina.
@@ -168,7 +168,7 @@ lsof -i :5084
 kill <PID>
 ```
 
-Troque `<PID>` pelo número que aparecer na coluna `PID` do comando `lsof`. Depois, rode `dotnet run --project topico-02-cliente-servidor/api/ClinicaVida.Api` de novo.
+Troque `<PID>` pelo número que aparecer na coluna `PID` do comando `lsof`. Depois, rode `dotnet run --project topico-01-cliente-servidor/api/ClinicaVida.Api` de novo.
 
 Correção no Windows (PowerShell):
 
@@ -181,7 +181,7 @@ taskkill /PID <PID> /F
 
 Isso significa que o Passo 5 (`npm install`) não foi rodado antes do Passo 6, então a pasta `node_modules` com o Vite não existe ainda.
 
-Correção: volte ao Passo 5, dentro de `topico-02-cliente-servidor/web`, rode `npm install` e espere terminar sem `npm error`. Só depois rode `npm run dev` de novo.
+Correção: volte ao Passo 5, dentro de `topico-01-cliente-servidor/web`, rode `npm install` e espere terminar sem `npm error`. Só depois rode `npm run dev` de novo.
 
 ## Experimente mudar
 
@@ -189,7 +189,7 @@ Faça cada mudança separadamente. Depois de cada uma, repita os passos 3 a 8 e 
 
 ### Mudança 1: acrescentar uma terceira consulta
 
-No arquivo `topico-02-cliente-servidor/api/ClinicaVida.Api/Controllers/ConsultasController.cs`, dentro da lista `Agenda`, adicione um terceiro item:
+No arquivo `topico-01-cliente-servidor/api/ClinicaVida.Api/Controllers/ConsultasController.cs`, dentro da lista `Agenda`, adicione um terceiro item:
 
 ```csharp
 new() { Id = 3, Paciente = "Carla Reis", Especialidade = "Dermatologia",

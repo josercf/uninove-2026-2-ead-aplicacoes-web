@@ -9,7 +9,7 @@
 ## Contexto
 
 Este repositório vai crescer ao longo do semestre até reunir os tópicos da
-disciplina Aplicações Web, começando pelo Tópico 02 (cliente-servidor). Três
+disciplina Aplicações Web, começando pelo Tópico 01 (cliente-servidor). Três
 escolhas precisam valer para todos os tópicos seguintes, e não fazia sentido
 decidir de novo a cada tópico novo: o formato do arquivo de solução do .NET,
 o que entra e o que fica de fora do scaffold gerado pelos templates, e como
@@ -82,7 +82,7 @@ qualquer aviso de vulnerabilidade futuro em erro de build.
   `grep` deixa de casar e o passo passa em silêncio, exatamente o cenário que
   deveria impedir. O NuGet Audit (`NuGetAudit`, `NuGetAuditMode` e
   `NuGetAuditLevel`, configurados em
-  `topico-02-cliente-servidor/api/Directory.Build.props`) é o mecanismo
+  `topico-01-cliente-servidor/api/Directory.Build.props`) é o mecanismo
   nativo do próprio SDK: ele gera os avisos `NU1901` a `NU1904` durante o
   `restore`, e `WarningsAsErrors` transforma esses avisos em erro de build,
   o que interrompe o `restore` de forma determinística, sem depender de
@@ -100,7 +100,7 @@ qualquer aviso de vulnerabilidade futuro em erro de build.
   trazer de volta uma vulnerabilidade conhecida sem que ninguém perceba, em
   algum dos próximos tópicos.
   **Mitigação:** o NuGet Audit, configurado em
-  `topico-02-cliente-servidor/api/Directory.Build.props`, roda a cada
+  `topico-01-cliente-servidor/api/Directory.Build.props`, roda a cada
   `dotnet restore` (local ou na CI) e falha o build com erro `NU1901`-`NU1904`
   assim que um pacote (direto ou transitivo) tiver vulnerabilidade conhecida
   de severidade `low` ou maior. Esse comportamento foi testado de propósito:
@@ -134,7 +134,7 @@ add`) toda vez que um projeto novo for criado; `Microsoft.OpenApi` passou a
 ser uma dependência fixada à mão, que alguém precisa lembrar de revisar
 quando o SDK do .NET for atualizado; e o job `web` da CI, por enquanto, só
 compila o front (`npm run build`), sem nenhum teste automatizado de
-interface. Essa última lacuna é uma consequência aceita para o Tópico 02: o
+interface. Essa última lacuna é uma consequência aceita para o Tópico 01: o
 exemplo é deliberadamente simples (uma tabela que busca uma lista), e o
 esforço de montar testes de UI (por exemplo, com Testing Library) fica para
 quando um tópico futuro justificar esse investimento por ter lógica de

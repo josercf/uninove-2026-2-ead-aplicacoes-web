@@ -22,7 +22,7 @@ Os trechos de código citados nas aulas apontam para os arquivos deste repositó
    cd uninove-2026-2-ead-aplicacoes-web
    ```
 
-   Resultado esperado: o comando `ls` (ou `dir` no Windows) mostra o arquivo `README.md` e a pasta `topico-02-cliente-servidor`.
+   Resultado esperado: o comando `ls` (ou `dir` no Windows) mostra o arquivo `README.md` e a pasta `topico-01-cliente-servidor`.
 
 Depois disso, siga a seção "Como rodar tudo de uma vez" logo abaixo, ou entre direto na pasta do tópico que você quer estudar.
 
@@ -30,7 +30,7 @@ Depois disso, siga a seção "Como rodar tudo de uma vez" logo abaixo, ou entre 
 
 | Tópico | Assunto | Pasta |
 |---|---|---|
-| 02 | Cliente-servidor | [`topico-02-cliente-servidor`](./topico-02-cliente-servidor) |
+| 01 | Cliente-servidor | [`topico-01-cliente-servidor`](./topico-01-cliente-servidor) |
 
 Os demais tópicos da disciplina serão adicionados a esta tabela conforme as próximas aulas forem publicadas.
 
@@ -41,9 +41,9 @@ Estes comandos rodam a partir da pasta raiz do repositório (a pasta onde está 
 1. Restaurar e testar a parte de API de todos os tópicos:
 
    ```bash
-   dotnet restore topico-02-cliente-servidor/ClinicaVida.sln
-   dotnet build topico-02-cliente-servidor/ClinicaVida.sln
-   dotnet test topico-02-cliente-servidor/ClinicaVida.sln
+   dotnet restore topico-01-cliente-servidor/ClinicaVida.sln
+   dotnet build topico-01-cliente-servidor/ClinicaVida.sln
+   dotnet test topico-01-cliente-servidor/ClinicaVida.sln
    ```
 
    Resultado esperado: o build termina com `Build succeeded` e os testes aparecem como `Passed`.
@@ -51,7 +51,7 @@ Estes comandos rodam a partir da pasta raiz do repositório (a pasta onde está 
 2. Instalar e compilar a parte de front de todos os tópicos:
 
    ```bash
-   cd topico-02-cliente-servidor/web && npm install && npm run build && cd ../..
+   cd topico-01-cliente-servidor/web && npm install && npm run build && cd ../..
    ```
 
    Resultado esperado: a última linha mostra `built in` seguido de um tempo, sem nenhuma linha de erro.
