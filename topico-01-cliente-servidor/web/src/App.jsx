@@ -21,11 +21,16 @@ function App() {
   useEffect(() => {
     // Busca a agenda de consultas na API. Abra a aba Network do DevTools
     // antes de recarregar a página para ver esta requisição acontecer.
+    // fetch envia GET /api/consultas; o proxy do Vite repassa o pedido à API.
     fetch('/api/consultas')
+      // .then recebe a resposta quando ela chega do servidor.
       .then((resposta) => {
+        // resposta.ok vale true só quando o status está na faixa 2xx.
         if (!resposta.ok) {
+          // Qualquer outro status vira erro, com o número na mensagem.
           throw new Error(`A API respondeu com status ${resposta.status}`)
         }
+        // Com status 2xx, converte o corpo JSON em uma lista de objetos.
         return resposta.json()
       })
       .then((dados) => {

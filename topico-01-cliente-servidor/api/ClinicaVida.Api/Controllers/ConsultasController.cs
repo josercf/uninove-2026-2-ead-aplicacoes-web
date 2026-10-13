@@ -21,10 +21,14 @@ public class ConsultasController : ControllerBase
     public ActionResult<IEnumerable<Consulta>> Listar() => Ok(Agenda);
 
     // GET /api/consultas/1 devolve uma consulta, ou 404 quando não existe.
+    // {id:int}: o trecho depois de /api/consultas/ precisa ser um número inteiro.
     [HttpGet("{id:int}")]
+    // O número do caminho chega ao método no parâmetro id.
     public ActionResult<Consulta> Buscar(int id)
     {
+        // FirstOrDefault: a primeira consulta com esse Id, ou null se nenhuma tiver.
         var consulta = Agenda.FirstOrDefault(c => c.Id == id);
+        // ? : escolhe pela condição: null vira NotFound() (404); o resto, Ok (200).
         return consulta is null ? NotFound() : Ok(consulta);
     }
 }

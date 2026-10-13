@@ -106,7 +106,7 @@ Resultado esperado: a página mostra o título "Agenda da Clínica Vida+" e, log
 
 Com a página do Passo 7 aberta, abra o DevTools do navegador (tecla `F12` ou `Ctrl+Shift+I`, no macOS `Cmd+Option+I`), clique na aba "Network" e recarregue a página.
 
-Resultado esperado: aparece uma linha chamada `consultas` com status `200`. Clicando nela, a aba "Response" (ou "Preview") mostra o JSON cru devolvido pela API, o mesmo conteúdo que o Passo 4 mostrou pelo terminal.
+Resultado esperado: aparecem duas linhas chamadas `consultas`, ambas com status `200`. São duas porque o `main.jsx` envolve a aplicação no `StrictMode` do React, que no modo de desenvolvimento (`npm run dev`) executa duas vezes o trecho que busca a agenda, para revelar efeitos colaterais escondidos; a versão gerada por `npm run build` faz uma requisição só. Clicando em uma delas, a aba "Response" (ou "Preview") mostra o JSON cru devolvido pela API, o mesmo conteúdo que o Passo 4 mostrou pelo terminal.
 
 ## Saída esperada
 
