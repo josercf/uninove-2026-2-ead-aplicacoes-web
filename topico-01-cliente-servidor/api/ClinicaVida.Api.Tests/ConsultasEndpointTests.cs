@@ -5,17 +5,24 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
+// WebApplicationFactory<Program> sobe a API inteira na memória, a partir do Program.cs.
+// IClassFixture: a mesma API em memória serve a todos os testes desta classe.
 public class ConsultasEndpointTests : IClassFixture<WebApplicationFactory<Program>>
 {
+    // Cliente HTTP ligado à API em memória, sem passar por porta de rede.
     private readonly HttpClient _cliente;
 
+    // O xUnit entrega a fábrica; CreateClient cria o cliente que envia os pedidos.
     public ConsultasEndpointTests(WebApplicationFactory<Program> fabrica)
         => _cliente = fabrica.CreateClient();
 
+    // [Fact] marca o método como um teste que o dotnet test executa.
     [Fact]
     public async Task ListarConsultasRespondeDuzentos()
     {
+        // Envia GET /api/consultas, o mesmo pedido que o front faz ao abrir a agenda.
         var resposta = await _cliente.GetAsync("/api/consultas");
+        // Assert.Equal reprova o teste se o status for diferente de 200 OK.
         Assert.Equal(HttpStatusCode.OK, resposta.StatusCode);
     }
 
