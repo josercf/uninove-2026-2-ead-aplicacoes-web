@@ -1,0 +1,65 @@
+<!doctype html>
+<!-- lang informa o idioma do texto; o leitor de tela escolhe a pronúncia por ele. -->
+<html lang="pt-BR">
+<head>
+  <!-- utf-8: a codificação que mostra os acentos do português sem trocar letras. -->
+  <meta charset="utf-8">
+  <!-- viewport: no celular, a página usa a largura real da tela em vez de simular 980px. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- title: o texto que aparece na aba do navegador. -->
+  <title>Clínica Vida+</title>
+  <!-- link: liga a folha de estilo; o caminho é relativo à pasta deste arquivo. -->
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <!-- header: a região de topo da página, com logotipo, título e menu. -->
+  <header class="topo">
+    <!-- alt: texto lido no lugar da imagem; width e height reservam o espaço dela. -->
+    <img src="logo.svg" alt="Logotipo da Clínica Vida+" width="48" height="48">
+    <!-- h1: o título da página inteira, no topo da hierarquia de títulos. -->
+    <h1>Clínica Vida+</h1>
+    <!-- nav: o bloco de links principais; aria-label dá nome à região. -->
+    <nav aria-label="Navegação principal">
+      <ul>
+        <!-- href="#id": o link leva à parte da página que tem aquele id. -->
+        <li><a href="#especialidades">Especialidades</a></li>
+        <li><a href="#agenda-do-dia">Agenda do dia</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- main: o conteúdo principal, um só por página. -->
+  <main>
+    <!-- section: um bloco temático com título próprio; o id é o destino do link. -->
+    <section id="especialidades">
+      <!-- h2: o título da seção, um nível abaixo do h1. -->
+      <h2>Especialidades</h2>
+      <!-- ul: lista sem ordem; cada li é um item, aqui um cartão de especialidade. -->
+      <ul class="cartoes">
+        <li><h3>Clínica geral</h3><p>Consultas de rotina e encaminhamentos.</p></li>
+        <li><h3>Cardiologia</h3><p>Exames do coração e acompanhamento.</p></li>
+        <li><h3>Dermatologia</h3><p>Cuidados com a pele, cabelo e unhas.</p></li>
+      </ul>
+    </section>
+    <section id="agenda-do-dia">
+      <h2>Agenda do dia</h2>
+      <!-- table: dados em linhas e colunas; o id identifica esta tabela na página. -->
+      <table id="agenda">
+        <!-- thead: a linha de títulos; scope="col" liga cada título à coluna inteira. -->
+        <thead>
+          <tr><th scope="col">Id</th><th scope="col">Paciente</th><th scope="col">Especialidade</th><th scope="col">Horário</th></tr>
+        </thead>
+        <!-- tbody: as linhas de dados; cada td é uma célula. -->
+        <tbody>
+          <tr><td>1</td><td>Ana Souza</td><td>Clínica geral</td><td>09:00</td></tr>
+          <tr><td>2</td><td>Bruno Lima</td><td>Cardiologia</td><td>10:30</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <!-- footer: o rodapé da página; address marca os dados de contato da clínica. -->
+  <footer id="contato">
+    <address>Rua das Flores, 100, São Paulo, SP. Telefone (11) 4000-0000.</address>
+  </footer>
+</body>
+</html>

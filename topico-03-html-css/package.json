@@ -1,0 +1,8 @@
+{
+  "name": "topico-03-html-css",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test testes/"
+  }
+}
