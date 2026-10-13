@@ -11,20 +11,20 @@ builder.Services.AddOpenApi();
 // Build encerra a montagem e cria o objeto app, que vai atender as requisições.
 var app = builder.Build();
 
-// Fase 2, pipeline: o que acontece com cada requisição, na ordem em que está escrito.
+// Fase 2, pipeline: as etapas Use rodam na ordem escrita, e cada destino Map responde depois delas.
 // IsDevelopment vale true com ASPNETCORE_ENVIRONMENT=Development, do launchSettings.json.
 if (app.Environment.IsDevelopment())
 {
     // MapOpenApi publica a descrição da API no caminho /openapi/v1.json.
     app.MapOpenApi();
 }
-// UseHttpsRedirection responde 307 a um pedido http, apontando o endereço https.
+// UseHttpsRedirection responde 307 quando a API conhece uma porta https; no perfil http, só registra aviso.
 app.UseHttpsRedirection();
 // UseAuthorization confere as regras de acesso; o tópico 01 não declara nenhuma.
 app.UseAuthorization();
 // MapControllers liga cada rota ([Route], [HttpGet]) ao método do controller.
 app.MapControllers();
-// Run liga o servidor Kestrel nas portas do launchSettings.json e espera até Ctrl+C.
+// Run liga o Kestrel nas portas configuradas (no dotnet run, o applicationUrl do launchSettings.json) e espera até Ctrl+C.
 app.Run();
 
 // Classe parcial exposta para que WebApplicationFactory<Program>
