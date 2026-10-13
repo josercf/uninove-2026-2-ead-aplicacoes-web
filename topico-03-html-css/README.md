@@ -69,9 +69,9 @@ Isso significa que o navegador não encontrou o `estilos.css`. A causa mais comu
 
 Correção: devolva o `estilos.css` para a pasta `topico-03-html-css`, ao lado do `index.html`, com esse nome exato, e recarregue a página.
 
-### Erro 2: o logotipo não aparece e, no lugar dele, surge o texto "Logotipo da Clínica Vida+"
+### Erro 2: no lugar do logotipo aparece um ícone de imagem quebrada e o começo do texto "Logotipo da Clínica Vida+"
 
-Isso significa que o navegador não encontrou o `logo.svg`, e mostrou o texto alternativo do atributo `alt` no lugar da imagem.
+Isso significa que o navegador não encontrou o `logo.svg` e mostrou, no espaço de 48 por 48 pixels reservado à imagem, o texto alternativo do atributo `alt`, cortado pelo tamanho do espaço.
 
 Correção: confira se o `logo.svg` está na mesma pasta do `index.html` e recarregue a página.
 
