@@ -55,7 +55,11 @@ Resultado esperado: o terminal mostra mensagens de "Restaurado" (ou "Restored") 
 dotnet test topico-01-cliente-servidor/ClinicaVida.sln
 ```
 
-Resultado esperado: a última linha mostra `Passed! - Failed: 0, Passed: 5, Skipped: 0, Total: 5`.
+Resultado esperado: a última linha da saída começa como a linha abaixo. A duração em milissegundos varia de uma execução para outra.
+
+```text
+Passed!  - Failed:     0, Passed:     5, Skipped:     0, Total:     5, Duration: 452 ms - ClinicaVida.Api.Tests.dll (net10.0)
+```
 
 ### Passo 3: Subir a API
 

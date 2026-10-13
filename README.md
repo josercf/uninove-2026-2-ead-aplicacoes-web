@@ -22,7 +22,7 @@ Os trechos de código citados nas aulas apontam para os arquivos deste repositó
    cd uninove-2026-2-ead-aplicacoes-web
    ```
 
-   Resultado esperado: o comando `ls` (ou `dir` no Windows) mostra o arquivo `README.md` e a pasta `topico-01-cliente-servidor`.
+   Resultado esperado: o comando `ls` (ou `dir` no Windows) mostra o arquivo `README.md` e as pastas `topico-01-cliente-servidor`, `topico-03-html-css` e `topico-04-javascript`.
 
 Depois disso, siga a seção "Como rodar tudo de uma vez" logo abaixo, ou entre direto na pasta do tópico que você quer estudar.
 
