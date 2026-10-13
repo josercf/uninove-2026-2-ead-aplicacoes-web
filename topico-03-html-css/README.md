@@ -8,7 +8,7 @@ Nenhum servidor é necessário: o navegador abre o arquivo direto do disco.
 
 - `index.html`: a página, com um comentário em português em cada linha relevante.
 - `estilos.css`: a folha de estilo, primeiro para o celular e depois para telas de 768 pixels ou mais.
-- `logo.svg`: o logotipo da clínica, um círculo verde com uma cruz branca.
+- `logo.svg`: o logotipo da clínica, um círculo branco com uma cruz verde, visível sobre a faixa verde do topo.
 - `testes/estrutura.test.js`: sete testes que conferem a estrutura da página e a regra de largura do CSS.
 - `package.json`: declara o comando `npm test`. O tópico não instala nenhuma dependência.
 
@@ -30,7 +30,7 @@ Nenhum servidor é necessário: o navegador abre o arquivo direto do disco.
 
 Na pasta `topico-03-html-css`, dê um duplo clique no arquivo `index.html`.
 
-Resultado esperado: o navegador abre um endereço que começa por `file://` e mostra a faixa verde com o logotipo, o título "Clínica Vida+" e os links Especialidades, Agenda do dia e Contato.
+Resultado esperado: o navegador abre um endereço que começa por `file://` e mostra a faixa verde com o logotipo (círculo branco e cruz verde), o título "Clínica Vida+" e os links Especialidades, Agenda do dia e Contato.
 
 ### Passo 2: Ver o layout abaixo de 768 pixels
 
