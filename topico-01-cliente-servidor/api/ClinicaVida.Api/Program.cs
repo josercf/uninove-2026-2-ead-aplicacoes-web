@@ -3,7 +3,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Registra os serviços no contêiner de injeção de dependência.
-// AddControllers: habilita as classes da pasta Controllers, como ConsultasController.
+// AddControllers: habilita os controllers do projeto, como ConsultasController.
 builder.Services.AddControllers();
 // AddOpenApi: gera a descrição da API em JSON (https://aka.ms/aspnet/openapi).
 builder.Services.AddOpenApi();
