@@ -3,13 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ClinicaVida.Api.Controllers;
 
+// [ApiController] liga as convenções de API, como o 404 descrito em application/problem+json.
 [ApiController]
+// [controller] vira "Consultas", o nome da classe sem o sufixo Controller: rota api/Consultas.
 [Route("api/[controller]")]
+// ControllerBase entrega os métodos Ok() e NotFound(), que montam a resposta HTTP.
 public class ConsultasController : ControllerBase
 {
     // Dados em memória. A persistência entra em um tópico futuro.
+    // static readonly: uma só lista para a API inteira, recriada a cada partida do programa.
     private static readonly List<Consulta> Agenda =
+    // Os colchetes criam a lista já com os itens escritos dentro deles.
     [
+        // new() cria uma Consulta e preenche, entre chaves, as propriedades do modelo.
         new() { Id = 1, Paciente = "Ana Souza", Especialidade = "Clínica geral",
                 DataHora = new DateTime(2026, 10, 5, 9, 0, 0) },
         new() { Id = 2, Paciente = "Bruno Lima", Especialidade = "Cardiologia",
