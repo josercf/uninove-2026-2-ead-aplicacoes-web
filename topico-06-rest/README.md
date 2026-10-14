@@ -24,7 +24,7 @@ O que muda em relação ao tópico 01:
 - `api/ClinicaVida.Api/Controllers/ConsultasController.cs`: as cinco ações, uma por verbo.
 - `api/ClinicaVida.Api/Program.cs`: registra o repositório e liga as rotas.
 - `api/ClinicaVida.Api/ClinicaVida.Api.http`: uma requisição por verbo, para enviar pelo editor.
-- `api/ClinicaVida.Api.Tests/ConsultasRestTests.cs`: onze testes de integração com `WebApplicationFactory`, um por verbo e por código de status.
+- `api/ClinicaVida.Api.Tests/ConsultasRestTests.cs`: doze testes de integração com `WebApplicationFactory`, um por verbo e por código de status.
 - `requisicoes/*.json`: os corpos usados nos comandos `curl` de POST e PUT.
 
 A escolha do repositório atrás de interface está registrada em `docs/adrs/ADR-004-repositorio-em-memoria-atras-de-interface.md`.
@@ -54,7 +54,7 @@ dotnet test topico-06-rest/ClinicaVida.sln
 Resultado esperado: a última linha começa como a linha abaixo. A duração varia a cada execução.
 
 ```text
-Passed!  - Failed:     0, Passed:    11, Skipped:     0, Total:    11
+Passed!  - Failed:     0, Passed:    12, Skipped:     0, Total:    12
 ```
 
 ### Passo 2: Subir a API

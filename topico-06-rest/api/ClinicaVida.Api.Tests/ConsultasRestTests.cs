@@ -94,6 +94,18 @@ public class ConsultasRestTests : IDisposable
     }
 
     [Fact]
+    public async Task Post_sem_especialidade_responde_400()
+    {
+        // Sem este teste, apagar o [Required] da especialidade deixava os outros testes verdes.
+        var semEspecialidade = NovaConsulta("Elisa Prado");
+        semEspecialidade.Especialidade = "";
+
+        var resposta = await _cliente.PostAsJsonAsync("/api/consultas", semEspecialidade);
+
+        Assert.Equal(HttpStatusCode.BadRequest, resposta.StatusCode);
+    }
+
+    [Fact]
     public async Task Put_em_id_existente_responde_204_e_altera_a_consulta()
     {
         // PutAsJsonAsync envia a representação completa que substitui a consulta 1.

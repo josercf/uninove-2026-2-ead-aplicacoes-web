@@ -36,7 +36,7 @@ própria `WebApplicationFactory<Program>`.
 - **Troca de armazenamento sem mexer no controller:** o tópico de persistência
   registra outra implementação da mesma interface numa linha do `Program.cs`.
 - **Isolamento dos testes:** o repositório vive no contêiner de serviços de
-  cada fábrica. Cada um dos onze testes começa com as 3 consultas iniciais,
+  cada fábrica. Cada um dos doze testes começa com as 3 consultas iniciais,
   sem depender da ordem de execução.
 - **Mesmos dados do front:** as 3 consultas iniciais são as do `dados.js` do
   tópico 05. A agenda em React mostra a mesma tela quando passar a buscar os
@@ -50,7 +50,7 @@ própria `WebApplicationFactory<Program>`.
 - **Risco:** os dados se perdem quando a API para.
   **Mitigação:** comportamento declarado no README do tópico e na aula; o
   banco de dados entra no tópico de persistência.
-- **Risco:** uma fábrica por teste sobe a API onze vezes.
+- **Risco:** uma fábrica por teste sobe a API doze vezes.
   **Mitigação:** a suíte inteira levou cerca de 1 segundo em 14/10/2026. Se
   o número de testes crescer a ponto de pesar, a alternativa é uma fábrica
   compartilhada com a agenda reiniciada antes de cada teste.

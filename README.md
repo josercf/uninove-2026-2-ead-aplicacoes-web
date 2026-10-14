@@ -90,7 +90,7 @@ Estes comandos rodam a partir da pasta raiz do repositório (a pasta onde está 
    dotnet test topico-06-rest/ClinicaVida.sln
    ```
 
-   Resultado esperado: `Passed!  - Failed:     0, Passed:    11` na última linha.
+   Resultado esperado: `Passed!  - Failed:     0, Passed:    12` na última linha.
 
 Para rodar um exemplo específico com o passo a passo completo, entre na pasta do tópico indicada na tabela acima e siga o `README.md` de dentro dela. Cada tópico tem seu próprio passo a passo, com a saída esperada e uma seção de ajuda caso algo dê errado.
 
