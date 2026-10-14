@@ -39,7 +39,7 @@ A escolha do repositório atrás de interface está registrada em `docs/adrs/ADR
 
    Resultado esperado: um número igual ou maior que `10.0.0`.
 
-2. `curl`. No macOS e no Linux, ele já vem instalado. No Windows 10 e 11, o programa se chama `curl.exe`; no PowerShell, digite `curl.exe`, com a extensão, porque no Windows PowerShell 5.1 a palavra `curl` sozinha chama outro comando.
+2. `curl`. No macOS e no Linux, ele já vem instalado. No Windows 10 e 11, o programa se chama `curl.exe`; no PowerShell, digite `curl.exe`, com a extensão, porque no Windows PowerShell 5.1 a palavra `curl` sozinha chama outro comando. As saídas deste README foram colhidas no macOS; as indicações para o Windows não foram testadas.
 
 ## Como executar
 
@@ -73,7 +73,7 @@ Abra um segundo terminal e entre na pasta do tópico, onde ficam os arquivos de 
 cd topico-06-rest
 ```
 
-Envie as requisições na ordem abaixo. No Windows, troque `curl` por `curl.exe`; o resto do comando é igual.
+Envie as requisições na ordem abaixo. No Windows, use `curl.exe` no lugar de `curl` (indicação não testada no Windows).
 
 ```bash
 curl -i http://localhost:5084/api/consultas
@@ -88,7 +88,7 @@ curl -i -X DELETE http://localhost:5084/api/consultas/3
 
 Resultado esperado: a primeira linha de cada resposta traz, na ordem, `200 OK`, `200 OK`, `404 Not Found`, `201 Created`, `400 Bad Request`, `204 No Content`, `204 No Content` e `404 Not Found`. A seção "Saída esperada" mostra as respostas completas.
 
-O `-i` mostra a linha de status e os cabeçalhos antes do corpo. O `--data "@arquivo"` envia o conteúdo do arquivo como corpo; as aspas evitam que o PowerShell interprete o `@`.
+O `-i` mostra a linha de status e os cabeçalhos antes do corpo. O `--data "@arquivo"` envia o conteúdo do arquivo como corpo; as aspas foram postas para o PowerShell, que dá outro significado ao `@` no início de uma palavra (não testado no Windows).
 
 No PowerShell 7, o `Invoke-RestMethod` faz o mesmo pedido e guarda o status numa variável:
 
@@ -97,7 +97,7 @@ Invoke-RestMethod -Method Post -Uri http://localhost:5084/api/consultas -Content
 $status
 ```
 
-Resultado esperado: uma tabela com `id` 4 e `paciente` Diego Rocha, seguida do número `201`. O `Invoke-RestMethod` mostra a data no formato do idioma do sistema, por exemplo `07/10/2026 08:00:00`.
+Resultado esperado, medido com o PowerShell 7.6.7 no macOS: uma tabela com `id` 4 e `paciente` Diego Rocha, seguida do número `201`. O `Invoke-RestMethod` mostra a data no formato do idioma do sistema, por exemplo `07/10/2026 08:00:00`.
 
 ## Saída esperada
 
@@ -183,10 +183,11 @@ O pedido saiu sem o cabeçalho `Content-Type: application/json`, e a API não re
 
 ### Erro 4: no PowerShell, o `curl -i` pede um parâmetro `Uri` ou mostra uma tabela com `StatusCode`
 
-No Windows PowerShell 5.1, `curl` é outro nome do `Invoke-WebRequest`. Digite `curl.exe`, com a extensão.
+No Windows PowerShell 5.1, `curl` é outro nome do `Invoke-WebRequest`. Digite `curl.exe`, com a extensão. Este erro e a correção não foram reproduzidos no Windows para este tópico.
 
 ## Experimente mudar
 
 1. Envie o `POST` de `nova-consulta.json` duas vezes. Qual id cada uma recebe, e o que o `Location` de cada resposta traz?
 2. Remova a consulta 4 com `DELETE` e crie outra com `POST`. O id 4 volta a ser usado? Confira no `ConsultaRepositorioEmMemoria.cs` o motivo.
 3. Apague o `[Required]` da especialidade no `Consulta.cs`, reinicie a API e envie um `POST` sem especialidade. Qual status volta agora?
+4. Envie um `POST` com paciente e especialidade, sem o campo `dataHora`. O `DataHora` do `Consulta.cs` não tem `[Required]`. Qual status volta, e qual data aparece no corpo?
