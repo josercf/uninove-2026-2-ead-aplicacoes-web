@@ -1,0 +1,34 @@
+# Uma requisição por verbo da API REST de consultas. No VS Code (extensão REST Client)
+# ou no Visual Studio, clique em "Send Request" acima de cada bloco.
+@host = http://localhost:5084
+
+### GET da coleção: 200 com as consultas
+GET {{host}}/api/consultas
+Accept: application/json
+
+### GET de um item: 200 com a consulta 2 (troque por 99 para ver o 404)
+GET {{host}}/api/consultas/2
+Accept: application/json
+
+### POST: 201 com o cabeçalho Location (apague o paciente para ver o 400)
+POST {{host}}/api/consultas
+Content-Type: application/json
+
+{
+  "paciente": "Diego Rocha",
+  "especialidade": "Dermatologia",
+  "dataHora": "2026-10-07T08:00:00"
+}
+
+### PUT: 204 sem corpo, a consulta 1 inteira é substituída
+PUT {{host}}/api/consultas/1
+Content-Type: application/json
+
+{
+  "paciente": "Ana Souza",
+  "especialidade": "Cardiologia",
+  "dataHora": "2026-10-05T09:00:00"
+}
+
+### DELETE: 204 na primeira vez, 404 na segunda
+DELETE {{host}}/api/consultas/3

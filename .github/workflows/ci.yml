@@ -77,3 +77,16 @@ jobs:
         working-directory: topico-05-react
       - run: npm run build
         working-directory: topico-05-react
+
+  rest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+      # O restore falha se houver pacote vulnerável (NuGet Audit em
+      # topico-06-rest/api/Directory.Build.props, mesma regra do tópico 01).
+      - run: dotnet restore topico-06-rest/ClinicaVida.sln
+      - run: dotnet build topico-06-rest/ClinicaVida.sln --no-restore -c Release
+      - run: dotnet test topico-06-rest/ClinicaVida.sln --no-build -c Release

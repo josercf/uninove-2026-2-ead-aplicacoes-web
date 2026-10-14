@@ -22,7 +22,7 @@ Os trechos de código citados nas aulas apontam para os arquivos deste repositó
    cd uninove-2026-2-ead-aplicacoes-web
    ```
 
-   Resultado esperado: o comando `ls` (ou `dir` no Windows) mostra o arquivo `README.md` e as pastas `topico-01-cliente-servidor`, `topico-03-html-css`, `topico-04-javascript` e `topico-05-react`.
+   Resultado esperado: o comando `ls` (ou `dir` no Windows) mostra o arquivo `README.md` e as pastas `topico-01-cliente-servidor`, `topico-03-html-css`, `topico-04-javascript`, `topico-05-react` e `topico-06-rest`.
 
 Depois disso, siga a seção "Como rodar tudo de uma vez" logo abaixo, ou entre direto na pasta do tópico que você quer estudar.
 
@@ -34,6 +34,7 @@ Depois disso, siga a seção "Como rodar tudo de uma vez" logo abaixo, ou entre 
 | 03 | HTML semântico e CSS responsivo | [`topico-03-html-css`](./topico-03-html-css) |
 | 04 | Introdução ao JavaScript | [`topico-04-javascript`](./topico-04-javascript) |
 | 05 | Frameworks front-end modernos (React) | [`topico-05-react`](./topico-05-react) |
+| 06 | Arquiteturas web MVC, REST e microsserviços (API REST) | [`topico-06-rest`](./topico-06-rest) |
 
 A aula 02 usa a mesma pasta do tópico 01 e por isso não tem pasta própria. Os demais tópicos da disciplina serão adicionados a esta tabela conforme as próximas aulas forem publicadas.
 
@@ -83,6 +84,14 @@ Estes comandos rodam a partir da pasta raiz do repositório (a pasta onde está 
 
    Resultado esperado: `Tests  8 passed (8)` na saída dos testes e `built in` seguido de um tempo na última linha.
 
+6. Testar a API REST do tópico 06:
+
+   ```bash
+   dotnet test topico-06-rest/ClinicaVida.sln
+   ```
+
+   Resultado esperado: `Passed!  - Failed:     0, Passed:    11` na última linha.
+
 Para rodar um exemplo específico com o passo a passo completo, entre na pasta do tópico indicada na tabela acima e siga o `README.md` de dentro dela. Cada tópico tem seu próprio passo a passo, com a saída esperada e uma seção de ajuda caso algo dê errado.
 
 ## Pré-requisitos gerais
@@ -95,7 +104,7 @@ Para rodar um exemplo específico com o passo a passo completo, entre na pasta d
 
 - `topico-NN-nome-do-assunto/`: um exemplo executável por tópico da disciplina, com API, front (quando o tópico tiver um) e README próprio.
 - `docs/adrs/`: as decisões arquiteturais registradas ao longo do semestre, uma por arquivo, numeradas em ordem.
-- `.github/workflows/ci.yml`: a integração contínua, que compila e testa a API, compila o front, roda os testes da página do tópico 03, os das funções JavaScript do tópico 04 e os dos componentes React do tópico 05, e compila o tópico 05, a cada envio de código.
+- `.github/workflows/ci.yml`: a integração contínua, que compila e testa a API, compila o front, roda os testes da página do tópico 03, os das funções JavaScript do tópico 04 os dos componentes React do tópico 05 e os da API REST do tópico 06, e compila o tópico 05, a cada envio de código.
 
 ## Licença e uso didático
 
