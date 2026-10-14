@@ -25,9 +25,9 @@ test('Cardiologia mostra só as 2 consultas dessa especialidade', () => {
   render(<App />);
   // getByLabelText acha o campo pelo rótulo; fireEvent.change simula a troca de opção.
   fireEvent.change(screen.getByLabelText('Especialidade'), { target: { value: 'Cardiologia' } });
-  // toEqual compara o array de pacientes da tela com o esperado, item a item.
+  // expect(valor).toEqual(esperado): o teste falha se os pacientes da tela forem outros.
   expect(pacientesNaTabela()).toEqual(['Bruno Lima', 'Carla Mendes']);
-  // getByText interrompe o teste com erro se nenhum elemento tiver exatamente esse texto.
+  // getByText lança erro se nenhum elemento tiver esse texto; toBeTruthy confere que achou.
   expect(screen.getByText('2 consulta(s) encontrada(s).')).toBeTruthy();
 });
 
