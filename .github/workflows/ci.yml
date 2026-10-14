@@ -63,3 +63,17 @@ jobs:
         working-directory: topico-04-javascript
       - run: npm test
         working-directory: topico-04-javascript
+
+  react:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - run: npm ci
+        working-directory: topico-05-react
+      - run: npm test
+        working-directory: topico-05-react
+      - run: npm run build
+        working-directory: topico-05-react
