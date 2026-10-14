@@ -1,4 +1,4 @@
-// Campo de seleção da especialidade. Não guarda estado: mostra o valor recebido e avisa a troca.
+// Campo de seleção da especialidade, sem estado próprio: mostra o valor recebido e avisa a troca.
 // { valor, aoMudar }: desestruturação das props que o App passou em <FiltroEspecialidade ... />.
 export default function FiltroEspecialidade({ valor, aoMudar }) {
   return (
