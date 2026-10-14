@@ -74,11 +74,12 @@ public class ConsultasRestTests : IDisposable
 
         // 201 Created: o servidor criou um recurso novo.
         Assert.Equal(HttpStatusCode.Created, resposta.StatusCode);
-        // Location: o cabeçalho com o endereço do recurso criado.
+        // Location: o cabeçalho com o endereço do recurso criado; o ! afirma que ele não é null.
         Assert.Equal("/api/consultas/4", resposta.Headers.Location!.AbsolutePath);
+        // ReadFromJsonAsync converte o JSON do corpo de volta num objeto Consulta.
         var criada = await resposta.Content.ReadFromJsonAsync<Consulta>();
         Assert.Equal(4, criada!.Id);
-        // O endereço do Location responde com a mesma consulta.
+        // GetFromJsonAsync faz um GET no endereço do Location e já converte o JSON.
         var lida = await _cliente.GetFromJsonAsync<Consulta>(resposta.Headers.Location);
         Assert.Equal("Diego Rocha", lida!.Paciente);
     }

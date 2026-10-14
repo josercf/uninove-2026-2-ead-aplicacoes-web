@@ -23,7 +23,9 @@ public class ConsultasController : ControllerBase
     [HttpGet("{id:int}")]
     public ActionResult<Consulta> Buscar(int id)
     {
+        // Pede a consulta à interface; o controller não sabe onde a agenda está guardada.
         var consulta = _repositorio.Buscar(id);
+        // Ok(consulta): status 200 e a consulta convertida em JSON no corpo da resposta.
         return consulta is null ? NotFound() : Ok(consulta);
     }
 
@@ -32,6 +34,7 @@ public class ConsultasController : ControllerBase
     // [FromBody]: a consulta chega no corpo da requisição, em JSON.
     public ActionResult<Consulta> Criar([FromBody] Consulta nova)
     {
+        // Quando o método roda, o [Required] já passou: o corpo tem paciente e especialidade.
         var criada = _repositorio.Adicionar(nova);
         // CreatedAtAction: status 201, corpo com a consulta e cabeçalho Location
         // montado a partir da rota da ação Buscar, com o id novo: /api/consultas/4.
