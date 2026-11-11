@@ -117,3 +117,17 @@ jobs:
         working-directory: topico-07-fetch
       - run: npm run build
         working-directory: topico-07-fetch
+
+  persistencia:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+      # O restore falha se houver pacote vulnerável (NuGet Audit em
+      # topico-08-persistencia/api/Directory.Build.props, mesma regra dos tópicos anteriores).
+      # Os testes usam SQLite em memória; nenhum servidor de banco é necessário.
+      - run: dotnet restore topico-08-persistencia/ClinicaVida.sln
+      - run: dotnet build topico-08-persistencia/ClinicaVida.sln --no-restore -c Release
+      - run: dotnet test topico-08-persistencia/ClinicaVida.sln --no-build -c Release

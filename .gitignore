@@ -14,3 +14,8 @@ dist-ssr/
 .vscode/
 .idea/
 .DS_Store
+
+# Bancos SQLite criados ao rodar a API
+*.db
+*.db-shm
+*.db-wal
