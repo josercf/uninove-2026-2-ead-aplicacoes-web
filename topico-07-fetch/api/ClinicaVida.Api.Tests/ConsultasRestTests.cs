@@ -39,10 +39,14 @@ public class ConsultasRestTests : IDisposable
     public async Task Get_colecao_mantem_os_nomes_de_campo_do_topico_01()
     {
         // Lê o texto cru: um nome de campo trocado quebraria o front da aula 07.
+        // GetStringAsync faz o GET e devolve o corpo da resposta como texto, sem converter para Consulta.
         var json = await _cliente.GetStringAsync("/api/consultas");
+        // JsonDocument.Parse monta uma árvore do texto; using libera a memória da árvore no fim do teste.
         using var documento = JsonDocument.Parse(json);
+        // RootElement é o array da resposta; [0] pega a primeira consulta.
         var primeira = documento.RootElement[0];
 
+        // GetProperty procura o nome exato do campo e lança KeyNotFoundException se ele não existir.
         Assert.Equal(1, primeira.GetProperty("id").GetInt32());
         Assert.Equal("Ana Souza", primeira.GetProperty("paciente").GetString());
         Assert.Equal("Clínica geral", primeira.GetProperty("especialidade").GetString());

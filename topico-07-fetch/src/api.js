@@ -1,5 +1,5 @@
-// Busca as consultas na API do tópico 06. No tópico 05 elas vinham do dados.js.
-// A API sobe em http://localhost:5084 (launchSettings.json do tópico 06).
+// Busca as consultas na API do tópico 07, cópia da API do tópico 06 com CORS. No tópico 05 elas vinham do dados.js.
+// A API sobe em http://localhost:5084 (launchSettings.json da pasta api/).
 export const URL_API = 'http://localhost:5084';
 
 // async: a função devolve uma Promise, um objeto que representa um resultado que ainda vai chegar.

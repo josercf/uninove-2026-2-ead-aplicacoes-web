@@ -31,10 +31,12 @@ public class CorsTests : IDisposable
     [Fact]
     public async Task Outra_origem_nao_recebe_o_cabecalho()
     {
+        // SendAsync envia o pedido montado por GetComOrigem, com o cabeçalho Origin de uma porta fora da lista.
         var resposta = await _cliente.SendAsync(GetComOrigem("http://localhost:9999"));
 
         // A API ainda responde 200: quem bloqueia a leitura é o navegador, pela ausência do cabeçalho.
         Assert.Equal(HttpStatusCode.OK, resposta.StatusCode);
+        // Headers.Contains devolve false quando o cabeçalho não veio na resposta.
         Assert.False(resposta.Headers.Contains("Access-Control-Allow-Origin"));
     }
 
