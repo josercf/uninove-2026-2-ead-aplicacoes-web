@@ -90,3 +90,30 @@ jobs:
       - run: dotnet restore topico-06-rest/ClinicaVida.sln
       - run: dotnet build topico-06-rest/ClinicaVida.sln --no-restore -c Release
       - run: dotnet test topico-06-rest/ClinicaVida.sln --no-build -c Release
+
+  fetch-api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+      # O restore falha se houver pacote vulnerável (NuGet Audit em
+      # topico-07-fetch/api/Directory.Build.props, mesma regra dos tópicos 01 e 06).
+      - run: dotnet restore topico-07-fetch/ClinicaVida.sln
+      - run: dotnet build topico-07-fetch/ClinicaVida.sln --no-restore -c Release
+      - run: dotnet test topico-07-fetch/ClinicaVida.sln --no-build -c Release
+
+  fetch-web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - run: npm ci
+        working-directory: topico-07-fetch
+      - run: npm test
+        working-directory: topico-07-fetch
+      - run: npm run build
+        working-directory: topico-07-fetch

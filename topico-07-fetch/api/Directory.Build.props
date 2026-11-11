@@ -1,0 +1,17 @@
+<Project>
+
+  <!--
+    Auditoria de segurança do NuGet para os dois projetos da API.
+    NuGetAuditMode=all confere também os pacotes transitivos, não só os
+    diretos, e WarningsAsErrors transforma os avisos de auditoria em erro
+    de build, para que um pacote vulnerável pare o restore/build de forma
+    determinística, sem depender de nenhum texto de saída em inglês.
+  -->
+  <PropertyGroup>
+    <NuGetAudit>true</NuGetAudit>
+    <NuGetAuditMode>all</NuGetAuditMode>
+    <NuGetAuditLevel>low</NuGetAuditLevel>
+    <WarningsAsErrors>$(WarningsAsErrors);NU1901;NU1902;NU1903;NU1904</WarningsAsErrors>
+  </PropertyGroup>
+
+</Project>
