@@ -35,10 +35,10 @@ public class AutenticacaoController(ClinicaContexto banco, IPasswordHasher<Usuar
         // Claims: os dados que o cookie leva. O nome do paciente serve à checagem de dono da consulta.
         var identidade = new ClaimsIdentity(
         [
-            new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
-            new Claim(ClaimTypes.Email, usuario.Email),
-            new Claim("paciente", usuario.Paciente?.Nome ?? ""),
-        ], CookieAuthenticationDefaults.AuthenticationScheme);
+            new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()), // id da conta na tabela Usuarios
+            new Claim(ClaimTypes.Email, usuario.Email), // e-mail usado no login
+            new Claim("paciente", usuario.Paciente?.Nome ?? ""), // nome do paciente dono da conta; vazio se a conta não tem paciente
+        ], CookieAuthenticationDefaults.AuthenticationScheme); // o esquema de cookie é quem vai guardar esta identidade
 
         // SignInAsync: o middleware de cookie criptografa as claims e envia o Set-Cookie na resposta.
         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identidade));

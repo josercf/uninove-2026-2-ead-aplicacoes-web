@@ -35,13 +35,13 @@ A senha é pública e só vale para estudo. Um sistema real não cria conta com 
 
    Resultado esperado: um número que começa por `10.`.
 
-2. Node.js 20 ou superior, para o exemplo de XSS.
+2. Node.js 22.22.2 ou superior, para o exemplo de XSS. O jsdom 30.1.1 declara no campo `engines` as versões `^22.22.2 || ^24.15.0 || >=26.0.0`.
 
    ```bash
    node --version
    ```
 
-   Resultado esperado: `v20` ou maior.
+   Resultado esperado: `v22.22.2` ou maior.
 
 3. Os comandos `curl` e `sqlite3`, para os passos 4 a 6.
 

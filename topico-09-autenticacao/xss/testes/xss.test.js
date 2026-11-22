@@ -20,8 +20,8 @@ function novaPagina(opcoes = {}) {
 // O navegador dispara o evento error de uma imagem que não carrega. O jsdom não busca a imagem,
 // então o teste dispara o mesmo evento em cada <img> criada, que é o que o navegador faria.
 function dispararErroDasImagens(janela) {
-  for (const imagem of janela.document.querySelectorAll('img')) {
-    imagem.dispatchEvent(new janela.Event('error'));
+  for (const imagem of janela.document.querySelectorAll('img')) { // percorre cada img criada pelo desenho
+    imagem.dispatchEvent(new janela.Event('error')); // dispara o evento error, que roda o onerror
   }
 }
 
