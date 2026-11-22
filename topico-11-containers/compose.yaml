@@ -1,28 +1,28 @@
 # Compose do tópico 11: a API, o front e o volume do banco SQLite.
-name: clinica-vida
+name: clinica-vida  # prefixo dos nomes: imagem clinica-vida-api, container clinica-vida-api-1, volume clinica-vida_dados
 
 services:
   # api: a imagem de api/Dockerfile, publicada na porta 5084 do computador.
   api:
-    build: ./api
+    build: ./api  # constrói a imagem a partir de api/Dockerfile
     ports:
-      - "5084:8080"
-    environment:
+      - "5084:8080"  # porta 5084 do computador -> porta 8080 do container
+    environment:  # variáveis que o ASP.NET Core lê como configuração; substituem o ENV do Dockerfile
       # O front é servido em http://localhost:5173; é a origem que o CORS da API aceita.
       Cors__Origem: "http://localhost:5173"
       ConnectionStrings__Clinica: "Data Source=/dados/clinica.db"
-    volumes:
+    volumes:  # pastas do container montadas fora da camada gravável
       # Volume nomeado: o arquivo clinica.db sobrevive a "docker compose down".
       - dados:/dados
 
   # web: a imagem de web/Dockerfile, nginx entregando o front na porta 5173 do computador.
   web:
-    build: ./web
+    build: ./web  # constrói a imagem a partir de web/Dockerfile
     ports:
-      - "5173:80"
+      - "5173:80"  # porta 5173 do computador -> porta 80 do nginx no container
     # O front só sobe depois que o container da API foi criado.
     depends_on:
       - api
 
-volumes:
+volumes:  # volumes nomeados que o Compose cria e gerencia
   dados:
