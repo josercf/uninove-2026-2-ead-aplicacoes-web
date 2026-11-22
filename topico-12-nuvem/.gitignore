@@ -1,0 +1,2 @@
+# Arquivo com os valores reais de cada ambiente; nunca é versionado.
+.env

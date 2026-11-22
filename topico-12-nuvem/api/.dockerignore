@@ -1,0 +1,8 @@
+# O padrão "bin/" só vale na raiz do contexto; "**/" alcança as pastas dentro de ClinicaVida.Api.
+**/bin/
+**/obj/
+*.db
+*.db-shm
+*.db-wal
+Dockerfile*
+.dockerignore

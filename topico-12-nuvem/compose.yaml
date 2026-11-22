@@ -1,0 +1,34 @@
+# Compose do tópico 12: só a API, configurada por variáveis de ambiente e com verificação de saúde.
+# Todo valor que muda de um ambiente para outro vem de variável; o padrão serve ao computador local.
+name: clinica-vida-nuvem
+
+services:
+  # api: a imagem de api/Dockerfile, a mesma do tópico 11, com a rota /health.
+  api:
+    build: ./api
+    ports:
+      # PORTA_API escolhe a porta do computador; dentro do container o Kestrel escuta sempre em 8080.
+      - "${PORTA_API:-5084}:8080"
+    environment:
+      # Origem que o CORS aceita; em produção seria o endereço público do front.
+      Cors__Origem: "${CORS_ORIGEM:-http://localhost:5173}"
+      # Caminho do banco SQLite; em um banco gerenciado seria a connection string do serviço, vinda de um cofre de segredos.
+      ConnectionStrings__Clinica: "${CONEXAO_CLINICA:-Data Source=/dados/clinica.db}"
+      # Ambiente em que a API roda; seleciona o appsettings.{Ambiente}.json.
+      ASPNETCORE_ENVIRONMENT: "${AMBIENTE:-Production}"
+    volumes:
+      - dados:/dados
+    # healthcheck: a imagem do ASP.NET não traz curl, então a verificação abre o socket pelo bash e lê a linha de status.
+    healthcheck:
+      test:
+        - CMD
+        - bash
+        - -c
+        - "exec 3<>/dev/tcp/127.0.0.1/8080 && printf 'GET /health HTTP/1.0\\r\\n\\r\\n' >&3 && head -n 1 <&3 | grep -q ' 200 '"
+      interval: 5s
+      timeout: 3s
+      retries: 6
+      start_period: 10s
+
+volumes:
+  dados:

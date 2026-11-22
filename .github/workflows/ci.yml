@@ -203,3 +203,26 @@ jobs:
       - if: always()
         run: docker compose down -v
         working-directory: topico-11-containers
+
+  nuvem:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+      # Testes de configuração: nenhum segredo nos arquivos versionados e /health respondendo 200.
+      - run: dotnet restore topico-12-nuvem/ClinicaVida.sln
+      - run: dotnet build topico-12-nuvem/ClinicaVida.sln --no-restore -c Release
+      - run: dotnet test topico-12-nuvem/ClinicaVida.sln --no-build -c Release
+      # Constrói a imagem, sobe a API com verificação de saúde e roda o teste de saúde no container.
+      - run: docker compose up -d --build --wait
+        working-directory: topico-12-nuvem
+      - run: ./teste-de-saude.sh
+        working-directory: topico-12-nuvem
+      - if: failure()
+        run: docker compose logs
+        working-directory: topico-12-nuvem
+      - if: always()
+        run: docker compose down -v
+        working-directory: topico-12-nuvem
