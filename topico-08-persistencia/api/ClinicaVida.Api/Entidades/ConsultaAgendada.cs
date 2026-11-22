@@ -1,6 +1,6 @@
 namespace ClinicaVida.Api.Entidades;
 
-// Entidade: uma linha da tabela Consultas. Guarda os números das linhas de Pacientes e de Especialidades, não os nomes.
+// Entidade: uma linha da tabela Consultas. Guarda os números das linhas de Pacientes e de Especialidades no lugar dos nomes.
 public class ConsultaAgendada
 {
     public int Id { get; set; }

@@ -171,7 +171,7 @@ O arquivo `clinica.db` guarda o estado entre execuções. Para voltar às 3 cons
 
 No `ClinicaContexto.cs`, apague a linha do `HasIndex(c => new { c.PacienteId, c.DataHora })`, gere uma migração nova com `dotnet ef migrations add SemUnicidadeDeHorario` e rode `dotnet test`.
 
-Pergunta: qual teste passa a falhar, e que status a API devolve ao repetir o POST de Ana Souza às 09:00?
+Pergunta: quais testes passam a falhar, e que status a API devolve ao repetir o POST de Ana Souza às 09:00?
 
 ### Mudança 2: ver as consultas SQL que o EF gera
 

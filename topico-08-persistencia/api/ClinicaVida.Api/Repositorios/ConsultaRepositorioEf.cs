@@ -11,12 +11,17 @@ public class ConsultaRepositorioEf(ClinicaContexto banco) : IConsultaRepositorio
 {
     // Projeção das três tabelas para o Consulta do contrato JSON, que continua com paciente e especialidade em texto.
     // O EF traduz o Select em um SELECT com JOIN; nenhuma entidade sai daqui.
+    // AsNoTracking: o resultado é só para leitura; o EF não acompanha mudanças nesses objetos.
     private IQueryable<Consulta> Projetar() => banco.Consultas.AsNoTracking()
+        // OrderBy vira ORDER BY "c"."Id": a lista sai na ordem de id, como no tópico 06.
         .OrderBy(c => c.Id)
+        // Select vira a lista de colunas do SELECT; cada propriedade do Consulta recebe uma coluna.
         .Select(c => new Consulta
         {
             Id = c.Id,
+            // A navegação c.Paciente vira INNER JOIN em Pacientes; Nome é a coluna lida de lá.
             Paciente = c.Paciente.Nome,
+            // A navegação c.Especialidade vira INNER JOIN em Especialidades.
             Especialidade = c.Especialidade.Nome,
             DataHora = c.DataHora,
         });
