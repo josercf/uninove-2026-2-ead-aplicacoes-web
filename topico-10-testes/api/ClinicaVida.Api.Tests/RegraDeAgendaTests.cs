@@ -14,8 +14,9 @@ public class RegraDeAgendaTests
     [InlineData(2026, 10, 11, 9, 0, false)]  // domingo
     public void Horario_de_atendimento_vai_de_segunda_a_sexta_das_8h_as_18h(int ano, int mes, int dia, int hora, int minuto, bool esperado)
     {
+        // Monta o instante do caso, com os segundos em zero.
         var instante = new DateTime(ano, mes, dia, hora, minuto, 0);
-
+        // Chama a regra direto, sem HTTP: o resultado depende só do instante do caso.
         Assert.Equal(esperado, RegraDeAgenda.EstaNoHorarioDeAtendimento(instante));
     }
 

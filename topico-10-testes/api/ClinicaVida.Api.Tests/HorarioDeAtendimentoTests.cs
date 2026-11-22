@@ -7,6 +7,7 @@ public class HorarioDeAtendimentoTests : IClassFixture<ApiFactory>
 {
     private readonly HttpClient _cliente;
 
+    // ClienteAutenticado faz o POST de login da Ana e guarda o cookie de sessão para as chamadas seguintes.
     public HorarioDeAtendimentoTests(ApiFactory fabrica) => _cliente = fabrica.ClienteAutenticado();
 
     private static Consulta NoInstante(DateTime instante) => new()
@@ -19,9 +20,12 @@ public class HorarioDeAtendimentoTests : IClassFixture<ApiFactory>
     [Fact]
     public async Task Post_no_sabado_responde_400_com_a_mensagem_da_regra()
     {
+        // O POST leva o cookie da Ana e uma consulta num sábado, 10/10/2026, às 09:00.
         var resposta = await _cliente.PostAsJsonAsync("/api/consultas", NoInstante(new DateTime(2026, 10, 10, 9, 0, 0)));
 
+        // O pedido passou pelo login, pelo controller e pela regra: o status é 400.
         Assert.Equal(HttpStatusCode.BadRequest, resposta.StatusCode);
+        // O corpo, lido como texto, traz a mensagem de RegraDeAgenda.MensagemDeRecusa.
         Assert.Contains("das 08:00 às 18:00", await resposta.Content.ReadAsStringAsync());
     }
 

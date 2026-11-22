@@ -19,7 +19,7 @@ A decisão sobre o 401 do tópico 09 está em `docs/adrs/ADR-008-testes-em-tres-
 ## Pré-requisitos
 
 1. .NET SDK 10.0 ou superior, conferido com `dotnet --version` (resultado esperado: um número que começa por `10.` ou maior).
-2. Node.js 22.12 ou superior, conferido com `node --version`.
+2. Node.js 22.22.2 ou superior, conferido com `node --version`. A versão mínima vem do jsdom 30.1.1, que a declara no campo `engines` do pacote.
 
 ## Como executar
 
