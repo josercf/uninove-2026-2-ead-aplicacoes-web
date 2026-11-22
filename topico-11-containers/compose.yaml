@@ -1,0 +1,28 @@
+# Compose do tópico 11: a API, o front e o volume do banco SQLite.
+name: clinica-vida
+
+services:
+  # api: a imagem de api/Dockerfile, publicada na porta 5084 do computador.
+  api:
+    build: ./api
+    ports:
+      - "5084:8080"
+    environment:
+      # O front é servido em http://localhost:5173; é a origem que o CORS da API aceita.
+      Cors__Origem: "http://localhost:5173"
+      ConnectionStrings__Clinica: "Data Source=/dados/clinica.db"
+    volumes:
+      # Volume nomeado: o arquivo clinica.db sobrevive a "docker compose down".
+      - dados:/dados
+
+  # web: a imagem de web/Dockerfile, nginx entregando o front na porta 5173 do computador.
+  web:
+    build: ./web
+    ports:
+      - "5173:80"
+    # O front só sobe depois que o container da API foi criado.
+    depends_on:
+      - api
+
+volumes:
+  dados:

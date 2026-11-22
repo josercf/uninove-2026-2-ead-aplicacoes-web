@@ -22,7 +22,7 @@ Os trechos de código citados nas aulas apontam para os arquivos deste repositó
    cd uninove-2026-2-ead-aplicacoes-web
    ```
 
-   Resultado esperado: o comando `ls` (ou `dir` no Windows) mostra o arquivo `README.md` e as pastas `topico-01-cliente-servidor`, `topico-03-html-css`, `topico-04-javascript`, `topico-05-react`, `topico-06-rest`, `topico-07-fetch`, `topico-08-persistencia`, `topico-09-autenticacao` e `topico-10-testes`.
+   Resultado esperado: o comando `ls` (ou `dir` no Windows) mostra o arquivo `README.md` e as pastas `topico-01-cliente-servidor`, `topico-03-html-css`, `topico-04-javascript`, `topico-05-react`, `topico-06-rest`, `topico-07-fetch`, `topico-08-persistencia`, `topico-09-autenticacao`, `topico-10-testes` e `topico-11-containers`.
 
 Depois disso, siga a seção "Como rodar tudo de uma vez" logo abaixo, ou entre direto na pasta do tópico que você quer estudar.
 
@@ -39,6 +39,7 @@ Depois disso, siga a seção "Como rodar tudo de uma vez" logo abaixo, ou entre 
 | 08 | Persistência e modelagem de dados para web (EF Core e SQLite) | [`topico-08-persistencia`](./topico-08-persistencia) |
 | 09 | Autenticação, sessão e segurança essencial na web (cookie, hash de senha e XSS) | [`topico-09-autenticacao`](./topico-09-autenticacao) |
 | 10 | Testes e depuração de aplicações web (Vitest, Testing Library, xUnit e cobertura) | [`topico-10-testes`](./topico-10-testes) |
+| 11 | Aplicações web em containers (Dockerfile, build em estágios, Compose e SQLite em volume) | [`topico-11-containers`](./topico-11-containers) |
 
 A aula 02 usa a mesma pasta do tópico 01 e por isso não tem pasta própria. Os demais tópicos da disciplina serão adicionados a esta tabela conforme as próximas aulas forem publicadas.
 
@@ -131,10 +132,19 @@ Estes comandos rodam a partir da pasta raiz do repositório (a pasta onde está 
 
    Resultado esperado: `Passed!  - Failed:     0, Passed:    60` na última linha dos testes da API, `ℹ pass 7` do `node --test`, `Tests  17 passed | 1 expected fail (18)` do Vitest e `Lines        : 100% ( 35/35 )` no resumo de cobertura.
 
+11. Subir a API, o front e o banco em containers e rodar o teste de fumaça do tópico 11:
+
+   ```bash
+   cd topico-11-containers && docker compose up -d --build && ./teste-de-fumaca.sh; docker compose down -v; cd ..
+   ```
+
+   Resultado esperado: oito linhas `ok` e `Teste de fumaça: todas as verificações passaram.`, seguidas das linhas `Removed` do `docker compose down -v`. Exige Docker com Compose v2 e as portas 5084 e 5173 livres.
+
 Para rodar um exemplo específico com o passo a passo completo, entre na pasta do tópico indicada na tabela acima e siga o `README.md` de dentro dela. Cada tópico tem seu próprio passo a passo, com a saída esperada e uma seção de ajuda caso algo dê errado.
 
 ## Pré-requisitos gerais
 
+- Docker com Compose v2, só para o tópico 11.
 - .NET SDK 10.0 ou superior instalado. Confirme com `dotnet --version`.
 - Node.js 18 ou superior e npm instalados, e Node.js 22.12 ou superior para o tópico 05. Confirme com `node --version` e `npm --version`.
 - Git instalado, para clonar o repositório.
@@ -143,7 +153,7 @@ Para rodar um exemplo específico com o passo a passo completo, entre na pasta d
 
 - `topico-NN-nome-do-assunto/`: um exemplo executável por tópico da disciplina, com API, front (quando o tópico tiver um) e README próprio.
 - `docs/adrs/`: as decisões arquiteturais registradas ao longo do semestre, uma por arquivo, numeradas em ordem.
-- `.github/workflows/ci.yml`: a integração contínua, que compila e testa a API, compila o front, roda os testes da página do tópico 03, os das funções JavaScript do tópico 04 os dos componentes React do tópico 05 e os da API REST do tópico 06, os da API com CORS e os do front com `fetch` do tópico 07, e compila os tópicos 05 e 07, os da API com banco de dados do tópico 08, os da API com autenticação e do exemplo de XSS do tópico 09, e os da API, dos componentes React e da cobertura do tópico 10, a cada envio de código.
+- `.github/workflows/ci.yml`: a integração contínua, que compila e testa a API, compila o front, roda os testes da página do tópico 03, os das funções JavaScript do tópico 04 os dos componentes React do tópico 05 e os da API REST do tópico 06, os da API com CORS e os do front com `fetch` do tópico 07, e compila os tópicos 05 e 07, os da API com banco de dados do tópico 08, os da API com autenticação e do exemplo de XSS do tópico 09, os da API, dos componentes React e da cobertura do tópico 10, e o teste de fumaça do tópico 11 sobre os containers, a cada envio de código.
 
 ## Licença e uso didático
 

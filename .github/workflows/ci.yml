@@ -186,3 +186,20 @@ jobs:
         working-directory: topico-10-testes
       - run: npm run build
         working-directory: topico-10-testes
+
+  containers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      # Constrói as duas imagens, sobe a API, o front e o volume do banco e roda o teste de fumaça com curl.
+      - run: docker compose up -d --build
+        working-directory: topico-11-containers
+      - run: ./teste-de-fumaca.sh
+        working-directory: topico-11-containers
+      # Mostra os logs da API quando algo falha e remove containers e volume ao final.
+      - if: failure()
+        run: docker compose logs
+        working-directory: topico-11-containers
+      - if: always()
+        run: docker compose down -v
+        working-directory: topico-11-containers

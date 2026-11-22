@@ -1,0 +1,8 @@
+# Versão de estágio único, só para medir o tamanho: tudo no mesmo estágio, SDK incluído na imagem final.
+FROM mcr.microsoft.com/dotnet/sdk:10.0
+WORKDIR /origem
+# Copia o contexto inteiro de uma vez; qualquer mudança invalida o restore.
+COPY . .
+RUN dotnet publish ClinicaVida.Api/ClinicaVida.Api.csproj -c Release -o /publica
+ENV ASPNETCORE_HTTP_PORTS=8080
+ENTRYPOINT ["dotnet", "/publica/ClinicaVida.Api.dll"]

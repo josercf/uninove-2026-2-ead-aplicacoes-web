@@ -1,0 +1,70 @@
+using ClinicaVida.Api.Agenda;
+using ClinicaVida.Api.Models;
+using ClinicaVida.Api.Repositorios;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+namespace ClinicaVida.Api.Controllers;
+
+// [Authorize]: sem cookie de sessão válido, todas as ações abaixo respondem 401.
+[Authorize]
+// [ApiController]: responde 400 sozinho quando o corpo viola um [Required] do modelo.
+[ApiController]
+// A rota do recurso é a mesma do tópico 01, escrita por extenso e em minúsculas.
+[Route("api/consultas")]
+public class ConsultasController : ControllerBase
+{
+    private readonly IConsultaRepositorio _repositorio;
+
+    // O ASP.NET Core entrega o repositório registrado no Program.cs (injeção de dependência).
+    public ConsultasController(IConsultaRepositorio repositorio) => _repositorio = repositorio;
+
+    // GET /api/consultas: a coleção inteira, 200 OK.
+    [HttpGet]
+    public ActionResult<IEnumerable<Consulta>> Listar() => Ok(_repositorio.Listar());
+
+    // GET /api/consultas/2: uma consulta, 200 OK, ou 404 Not Found.
+    [HttpGet("{id:int}")]
+    public ActionResult<Consulta> Buscar(int id)
+    {
+        // Pede a consulta à interface; o controller não sabe onde a agenda está guardada.
+        var consulta = _repositorio.Buscar(id);
+        // Ok(consulta): status 200 e a consulta convertida em JSON no corpo da resposta.
+        return consulta is null ? NotFound() : Ok(consulta);
+    }
+
+    // POST /api/consultas: cria uma consulta, 201 Created.
+    [HttpPost]
+    // [FromBody]: a consulta chega no corpo da requisição, em JSON.
+    public ActionResult<Consulta> Criar([FromBody] Consulta nova)
+    {
+        // Fora do horário de atendimento, a resposta é 400 e nada chega ao repositório.
+        if (!RegraDeAgenda.EstaNoHorarioDeAtendimento(nova.DataHora)) return RecusaDeHorario();
+        // Quando o método roda, o [Required] já passou: o corpo tem paciente e especialidade.
+        var criada = _repositorio.Adicionar(nova);
+        // CreatedAtAction: status 201, corpo com a consulta e cabeçalho Location
+        // montado a partir da rota da ação Buscar, com o id novo: /api/consultas/4.
+        return CreatedAtAction(nameof(Buscar), new { id = criada.Id }, criada);
+    }
+
+    // PUT /api/consultas/1: substitui a consulta inteira, 204 No Content, ou 404.
+    [HttpPut("{id:int}")]
+    public IActionResult Atualizar(int id, [FromBody] Consulta dados)
+    {
+        if (!RegraDeAgenda.EstaNoHorarioDeAtendimento(dados.DataHora)) return RecusaDeHorario();
+        // NoContent(): status 204, sem corpo na resposta.
+        return _repositorio.Atualizar(id, dados) ? NoContent() : NotFound();
+    }
+
+    // Responde 400 no mesmo formato de erro de validação do [ApiController], com a mensagem da regra.
+    private ActionResult RecusaDeHorario()
+    {
+        ModelState.AddModelError(nameof(Consulta.DataHora), RegraDeAgenda.MensagemDeRecusa);
+        return ValidationProblem(ModelState);
+    }
+
+    // DELETE /api/consultas/3: remove a consulta, 204 No Content, ou 404.
+    [HttpDelete("{id:int}")]
+    public IActionResult Remover(int id)
+        => _repositorio.Remover(id) ? NoContent() : NotFound();
+}
