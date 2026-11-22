@@ -36,7 +36,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         opcoes.Cookie.HttpOnly = true;
         // Secure: o navegador só envia o cookie por HTTPS, e a rede aberta não o expõe.
         opcoes.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-        // SameSite=Lax: o navegador não envia o cookie em POST disparado por outro site, o que barra o CSRF comum.
+        // SameSite=Lax: o navegador deixa de enviar o cookie em requisições disparadas por outro site, exceto ao seguir um link; configurado contra o CSRF, sem teste no repositório.
         opcoes.Cookie.SameSite = SameSiteMode.Lax;
         // A sessão expira após 30 minutos sem uso; passada metade do prazo, a próxima requisição recebe um cookie renovado.
         opcoes.ExpireTimeSpan = TimeSpan.FromMinutes(30);
