@@ -89,7 +89,9 @@ public class AutenticacaoTests(ITestOutputHelper saida) : IDisposable
         var valor = login.Headers.GetValues("Set-Cookie").Single().Split(';')[0];
 
         // O ticket vai criptografado: o navegador carrega o cookie, mas não lê as claims dentro dele.
-        Assert.DoesNotContain("ana", valor, StringComparison.OrdinalIgnoreCase);
+        // O e-mail inteiro e o sobrenome são procurados, porque o trecho "ana" sozinho aparece por acaso
+        // em 1,6% dos cookies (48 em 3000 logins medidos, cookie de 575 caracteres de Base64 aleatório).
+        Assert.DoesNotContain("ana@vidamais.example", valor, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("Souza", valor);
     }
 
