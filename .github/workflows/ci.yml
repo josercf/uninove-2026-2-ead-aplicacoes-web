@@ -131,3 +131,29 @@ jobs:
       - run: dotnet restore topico-08-persistencia/ClinicaVida.sln
       - run: dotnet build topico-08-persistencia/ClinicaVida.sln --no-restore -c Release
       - run: dotnet test topico-08-persistencia/ClinicaVida.sln --no-build -c Release
+
+  autenticacao-api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+      # O restore falha se houver pacote vulnerável (NuGet Audit em
+      # topico-09-autenticacao/api/Directory.Build.props, mesma regra dos tópicos anteriores).
+      # Os testes usam SQLite em memória e endereço https simulado; nenhum certificado é necessário.
+      - run: dotnet restore topico-09-autenticacao/ClinicaVida.sln
+      - run: dotnet build topico-09-autenticacao/ClinicaVida.sln --no-restore -c Release
+      - run: dotnet test topico-09-autenticacao/ClinicaVida.sln --no-build -c Release
+
+  autenticacao-xss:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - run: npm ci
+        working-directory: topico-09-autenticacao
+      - run: npm test
+        working-directory: topico-09-autenticacao

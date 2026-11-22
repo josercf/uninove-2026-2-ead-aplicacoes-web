@@ -1,0 +1,11 @@
+{
+  "name": "topico-09-autenticacao",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test xss/testes/"
+  },
+  "devDependencies": {
+    "jsdom": "30.1.1"
+  }
+}
